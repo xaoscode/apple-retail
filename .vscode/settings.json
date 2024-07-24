@@ -1,0 +1,18 @@
+{
+	"eslint.workingDirectories": [
+		{
+			"mode": "auto"
+		}
+	],
+	"sqltools.connections": [
+		{
+			"previewLimit": 50,
+			"server": "localhost",
+			"port": 5432,
+			"driver": "PostgreSQL",
+			"name": "Nestjs",
+			"database": "nestjs",
+			"username": "admin"
+		}
+	]
+}

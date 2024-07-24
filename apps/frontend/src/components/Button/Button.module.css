@@ -1,0 +1,161 @@
+.button {
+	display: inline-block;
+
+	cursor: pointer;
+	transition: 0.25s;
+
+	border: none;
+
+	background: none;
+}
+
+.positions {
+	display: flex;
+	align-items: center;
+
+	justify-content: center;
+}
+
+.small {
+	padding: 4px 8px;
+
+	border-radius: 8px;
+
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 20px;
+
+	.icon {
+		width: 15px;
+		height: 15px;
+	}
+
+	.positions {
+		gap: 4px;
+	}
+}
+
+.no-child-small {
+	padding: 4px;
+}
+
+.medium {
+	padding: 8px 16px;
+
+	border-radius: 12px;
+
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 24px;
+
+	.icon {
+		width: 20px;
+		height: 20px;
+	}
+
+	.positions {
+		gap: 8px;
+	}
+}
+
+.no-child-medium {
+	padding: 8px;
+}
+
+.large {
+	padding: 12px 24px;
+
+	border-radius: 16px;
+
+	font-size: 25px;
+	font-weight: 400;
+	line-height: 28px;
+
+	.icon {
+		width: 25px;
+		height: 25px;
+	}
+
+	.positions {
+		gap: 8px;
+	}
+}
+
+.no-child-large {
+	padding: 16px;
+}
+
+.borderless {
+	border: none;
+
+	&:hover {
+		background: var(--black-5);
+	}
+}
+
+.gray {
+	color: var(--primary-brand);
+	background-color: var(--black-5);
+
+	&:hover {
+		background: linear-gradient(0deg, var(--black-20), var(--black-20));
+	}
+
+	&:active {
+		background: linear-gradient(0deg, var(--black-10), var(--black-10));
+	}
+}
+
+.outline {
+	border: 1px solid var(--black-10);
+
+	&:hover {
+		border: 1px solid var(--black-20);
+
+		background: var(--black-5);
+	}
+
+	&:active {
+		background: linear-gradient(0deg, var(--black-5), var(--black-5));
+	}
+}
+
+.filled {
+	color: var(--white-100);
+	background-color: var(--primary-brand);
+
+	&:hover {
+		background: linear-gradient(0deg, var(--black-90), var(--black-90));
+	}
+
+	&:active {
+		background: linear-gradient(0deg, var(--black-30), var(--black-30));
+	}
+
+	.icon {
+		filter: invert(1);
+	}
+}
+
+.tooltip {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+
+	display: none;
+
+	padding: 5px 10px;
+
+	transform: translateX(-50%);
+	white-space: nowrap;
+
+	color: #fff;
+	border-radius: 4px;
+	background-color: #333;
+
+	font-size: 12px;
+}
+
+.button:hover .tooltip {
+	display: block;
+}

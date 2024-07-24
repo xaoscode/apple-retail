@@ -1,0 +1,17 @@
+.sub-text {
+	color: var(--black-40);
+
+	font-weight: 400;
+}
+
+.t1 {
+	font-size: 12px;
+
+	line-height: 16px;
+}
+
+.t2 {
+	font-size: 14px;
+
+	line-height: 20px;
+}
