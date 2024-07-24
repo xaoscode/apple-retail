@@ -15,12 +15,15 @@ export class AuthCacheService {
   }
 
   public async addRefreshToRedis(userId: string, fingerprint: string, token: string): Promise<void> {
-    const key = `user:${userId}:refresh_tokens`;
-    const field = `fingerprint:${fingerprint}`;
+    const key = `${token}:${userId}`;
 
     const transaction = this.redisService.multi();
 
-    await this.redisService.hset(key, field, token, transaction);
+    await this.redisService.zadd(key, this.refreshTokenExpirationTime, fingerprint, transaction);
+
+    await this.redisService.sadd(key, token, transaction);
     await this.redisService.expire(key, this.refreshTokenExpirationTime, transaction);
+
+    await this.redisService.exec(transaction);
   }
 }

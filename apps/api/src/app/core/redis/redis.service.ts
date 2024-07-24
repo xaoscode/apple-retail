@@ -34,10 +34,10 @@ export class RedisService {
     return client.hgetall(key);
   }
 
-  public zadd(key: string, score: number, multi?: ChainableCommander): ChainableCommander | Promise<number> {
+  public zadd(key: string, score: number, value: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
     const client = multi || this.redis;
 
-    return client.zadd(key, score);
+    return client.zadd(key, score, value);
   }
 
   public zrange(key: string, min: string | number, max: string | number, withscores: 'WITHSCORES', multi?: ChainableCommander): ChainableCommander | Promise<Array<string>> {
@@ -66,6 +66,18 @@ export class RedisService {
     const client = multi || this.redis;
 
     return client.expire(key, time);
+  }
+
+  public set(key: string, value: string, multi?: ChainableCommander): ChainableCommander | Promise<'OK'> {
+    const client = multi || this.redis;
+
+    return client.set(key, value);
+  }
+
+  public get(key: string, multi?: ChainableCommander): ChainableCommander | Promise<string> {
+    const client = multi || this.redis;
+
+    return client.get(key);
   }
 
   public async exec(multi: ChainableCommander): Promise<void> {
