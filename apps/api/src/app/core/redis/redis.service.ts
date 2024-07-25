@@ -10,56 +10,62 @@ export class RedisService {
     return this.redis.multi();
   }
 
-  public hset(key: string, field: string, value: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
+  public hSet(key: string, field: string, value: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
     const client = multi || this.redis;
 
     return client.hset(key, field, value);
   }
 
-  public hdel(key: string, fields: (string | Buffer)[], multi?: ChainableCommander): ChainableCommander | Promise<number> {
+  public hDel(key: string, field: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
     const client = multi || this.redis;
 
-    return client.hdel(key, ...fields);
+    return client.hdel(key, field);
   }
 
-  public hget(key: string, field: string, multi?: ChainableCommander): ChainableCommander | Promise<string> {
+  public hGet(key: string, field: string, multi?: ChainableCommander): ChainableCommander | Promise<string> {
     const client = multi || this.redis;
 
     return client.hget(key, field);
   }
 
-  public hgetall(key: string, multi?: ChainableCommander): ChainableCommander | Promise<Record<string, string>> {
+  public hGetAll(key: string, multi?: ChainableCommander): ChainableCommander | Promise<Record<string, string>> {
     const client = multi || this.redis;
 
     return client.hgetall(key);
   }
 
-  public zadd(key: string, score: number, value: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
+  public hKeys(key: string, multi?: ChainableCommander): ChainableCommander | Promise<string[]> {
+    const client = multi || this.redis;
+
+    return client.keys(key);
+  }
+
+  public zAdd(key: string, score: number, value: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
     const client = multi || this.redis;
 
     return client.zadd(key, score, value);
   }
 
-  public zrange(key: string, min: string | number, max: string | number, withscores: 'WITHSCORES', multi?: ChainableCommander): ChainableCommander | Promise<Array<string>> {
+  public zRange(key: string, min: string | number, max: string | number, withscores: 'WITHSCORES', multi?: ChainableCommander): ChainableCommander | Promise<Array<string>> {
     const client = multi || this.redis;
 
     return client.zrange(key, min, max, withscores);
   }
 
-  public sadd(hash: string, value: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
+  public sAdd(key: string, value: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
     const client = multi || this.redis;
 
-    return client.sadd(hash, value);
+    return client.sadd(key, value);
   }
 
-  public sRem(hash: string, setMembers: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
+  public sRem(key: string, member: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
     const client = multi || this.redis;
 
-    return client.srem(hash, setMembers);
+    return client.srem(key, member);
   }
 
-  public sMembers(hash: string): Promise<string[]> {
-    return this.redis.smembers(hash);
+  public sMembers(key: string): Promise<string[]> {
+    return this.redis.smembers(key);
   }
 
   public expire(key: string, time: number, multi?: ChainableCommander): ChainableCommander | Promise<number> {
@@ -78,6 +84,12 @@ export class RedisService {
     const client = multi || this.redis;
 
     return client.get(key);
+  }
+
+  public del(multi?: ChainableCommander, ...keys: string[]): ChainableCommander | Promise<number> {
+    const client = multi || this.redis;
+
+    return client.del(keys);
   }
 
   public async exec(multi: ChainableCommander): Promise<void> {

@@ -14,16 +14,37 @@ export class AuthCacheService {
     this.refreshTokenExpirationTime = this.configService.get('JWT_REFRESH_TOKEN_EXPIRATION_TIME');
   }
 
-  public async addRefreshToRedis(userId: string, fingerprint: string, token: string): Promise<void> {
-    const key = `${token}:${userId}`;
-
+  public async saveRefreshToRedis(userId: string, fingerprint: string, token: string): Promise<void> {
     const transaction = this.redisService.multi();
 
-    await this.redisService.zadd(key, this.refreshTokenExpirationTime, fingerprint, transaction);
+    const tokenKeys = await this.redisService.hKeys(userId, transaction);
 
-    await this.redisService.sadd(key, token, transaction);
-    await this.redisService.expire(key, this.refreshTokenExpirationTime, transaction);
+    if (tokenKeys.length > 10) {
+      await this.redisService.del(transaction, userId, fingerprint);
+
+      //some logic for user notificaton about suspicious activities
+    }
+
+    await this.redisService.hSet(userId, fingerprint, token, transaction);
+
+    await this.redisService.sAdd(fingerprint, token, transaction);
+    await this.redisService.expire(fingerprint, this.refreshTokenExpirationTime, transaction);
 
     await this.redisService.exec(transaction);
+  }
+
+  public async removeRefreshTokenFromRedis(userId: string, refreshToken: string, fingerprint: string) {
+    const transaction = this.redisService.multi();
+
+    await this.redisService.hDel(userId, fingerprint, transaction);
+    await this.redisService.sRem(fingerprint, refreshToken, transaction);
+
+    await this.redisService.exec(transaction);
+  }
+
+  public async verifRefreshToken(userId: string, fingerprint: string, refreshToken: string) {
+    const tokenExists = await this.redisService.sMembers(fingerprint);
+
+    return tokenExists.some((token: string) => token === refreshToken);
   }
 }
