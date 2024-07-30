@@ -14,36 +14,45 @@ export class AuthCacheService {
     this.refreshTokenExpirationTime = this.configService.get('JWT_REFRESH_TOKEN_EXPIRATION_TIME');
   }
 
-  public async saveRefreshToRedis(userId: string, fingerprint: string, token: string): Promise<void> {
+  public async saveRefreshToRedis(userId: string, refreshToken: string): Promise<void> {
     const transaction = this.redisService.multi();
+    const key = `${refreshToken}:${userId}`;
 
-    const tokenKeys = await this.redisService.hKeys(userId, transaction);
+    await this.redisService.keys(
+      userId,
+      (err, replies) => {
+        if (replies.length > 10) {
+          replies.forEach((key) => {
+            this.redisService.del(transaction, key);
+          });
+          //some logic for user notificaton about suspicious activities
+        }
+      },
+      transaction,
+    );
 
-    if (tokenKeys.length > 10) {
-      await this.redisService.del(transaction, userId, fingerprint);
+    await this.redisService.hSet(userId, key, refreshToken, transaction);
+    await this.redisService.expire(userId, this.refreshTokenExpirationTime, transaction);
 
-      //some logic for user notificaton about suspicious activities
-    }
-
-    await this.redisService.hSet(userId, fingerprint, token, transaction);
-
-    await this.redisService.sAdd(fingerprint, token, transaction);
-    await this.redisService.expire(fingerprint, this.refreshTokenExpirationTime, transaction);
+    await this.redisService.sAdd(key, refreshToken, transaction);
+    await this.redisService.expire(key, this.refreshTokenExpirationTime, transaction);
 
     await this.redisService.exec(transaction);
   }
 
-  public async removeRefreshTokenFromRedis(userId: string, refreshToken: string, fingerprint: string) {
+  public async removeRefreshTokenFromRedis(userId: string, refreshToken: string) {
     const transaction = this.redisService.multi();
+    const key = `${refreshToken}:${userId}`;
 
-    await this.redisService.hDel(userId, fingerprint, transaction);
-    await this.redisService.sRem(fingerprint, refreshToken, transaction);
+    await this.redisService.hDel(userId, key, transaction);
+    await this.redisService.del(transaction, key);
 
     await this.redisService.exec(transaction);
   }
 
-  public async verifRefreshToken(userId: string, fingerprint: string, refreshToken: string) {
-    const tokenExists = await this.redisService.sMembers(fingerprint);
+  public async verifRefreshToken(userId: string, refreshToken: string) {
+    const key = `${refreshToken}:${userId}`;
+    const tokenExists = await this.redisService.sMembers(key);
 
     return tokenExists.some((token: string) => token === refreshToken);
   }

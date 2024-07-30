@@ -9,7 +9,6 @@ import { ChatGateway } from './chat/chat.gateway';
 import { ChatModule } from './chat/chat.module';
 import { UpRedisModule } from './core/redis/redis.module';
 import { UserModule } from './user/user.module';
-import { RedisModule } from '@nestjs-modules/ioredis';
 
 @Module({
   imports: [
@@ -29,7 +28,6 @@ import { RedisModule } from '@nestjs-modules/ioredis';
     UserModule,
     AuthModule,
     UpRedisModule,
-    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

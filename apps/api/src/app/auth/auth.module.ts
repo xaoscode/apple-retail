@@ -6,12 +6,15 @@ import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module';
+import { AuthCacheService } from './auth-caсhe.service';
+import { UpRedisModule } from '../core/redis/redis.module';
 
 @Module({
   imports: [
     UserModule,
     PassportModule,
     ConfigModule,
+    UpRedisModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -23,7 +26,7 @@ import { UserModule } from '../user/user.module';
       }),
     }),
   ],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, AuthCacheService],
   controllers: [AuthController],
 })
 export class AuthModule {}
