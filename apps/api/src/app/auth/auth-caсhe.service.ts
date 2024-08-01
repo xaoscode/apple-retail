@@ -18,18 +18,15 @@ export class AuthCacheService {
     const transaction = this.redisService.multi();
     const key = `${refreshToken}:${userId}`;
 
-    await this.redisService.keys(
-      userId,
-      (err, replies) => {
-        if (replies.length > 10) {
-          replies.forEach((key) => {
-            this.redisService.del(transaction, key);
-          });
-          //some logic for user notificaton about suspicious activities
-        }
-      },
-      transaction,
-    );
+    const replies = await this.redisService.hKeys(userId);
+
+    if (replies.length >= 10) {
+      replies.forEach((key) => {
+        this.redisService.del(transaction, key);
+      });
+      this.redisService.del(transaction, userId);
+      //some logic for user notificaton about suspicious activities
+    }
 
     await this.redisService.hSet(userId, key, refreshToken, transaction);
     await this.redisService.expire(userId, this.refreshTokenExpirationTime, transaction);

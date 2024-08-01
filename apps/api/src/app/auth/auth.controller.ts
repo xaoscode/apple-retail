@@ -29,7 +29,7 @@ export class AuthController {
     const { user } = request;
     const accessTokenCookie = this.authService.getCookieWithJwtAccessToken(user.id);
     const { cookie, token } = this.authService.getCookieWithJwtRefreshToken(user.id);
-
+    ``;
     await this.authCacheService.saveRefreshToRedis(user.id, token);
 
     request.res.setHeader('Set-Cookie', [accessTokenCookie, cookie]);

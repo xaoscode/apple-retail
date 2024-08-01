@@ -1,6 +1,6 @@
 import { InjectRedis } from '@nestjs-modules/ioredis';
 import { Injectable } from '@nestjs/common';
-import { Callback, ChainableCommander, Redis } from 'ioredis';
+import { ChainableCommander, Redis } from 'ioredis';
 
 @Injectable()
 export class RedisService {
@@ -28,16 +28,14 @@ export class RedisService {
     return client.hget(key, field);
   }
 
-  public hGetAll(key: string, multi?: ChainableCommander): ChainableCommander | Promise<Record<string, string>> {
-    const client = multi || this.redis;
-
-    return client.hgetall(key);
+  public hGetAll(key: string): Promise<Record<string, string>> {
+    return this.redis.hgetall(key);
   }
-
-  public keys(key: string, callback?: Callback<string[]>, multi?: ChainableCommander): ChainableCommander | Promise<string[]> {
-    const client = multi || this.redis;
-
-    return client.keys(key, callback);
+  public hKeys(key: string): Promise<string[]> {
+    return this.redis.hkeys(key);
+  }
+  public keys(key: string): Promise<string[]> {
+    return this.redis.keys(key);
   }
 
   public zAdd(key: string, score: number, value: string, multi?: ChainableCommander): ChainableCommander | Promise<number> {
