@@ -3,19 +3,15 @@ import styles from "./Input.module.css"
 import cn from "classnames";
 import { Button } from "../Button/Button";
 
-export function Input({ error, ...props }: InputProps): JSX.Element {
+export function Input({ className, error, ...props }: InputProps): JSX.Element {
     return (
-        <div>
+        <div className={ cn(styles['in'], className) }>
 
             <div className={ styles["input-wrapper"] }>
-                <input className={ cn(styles.input, { [styles.error]: error }) } { ...props } />
+                <input className={ cn(styles['input'], { [styles['error']]: error }) } { ...props } />
                 { error &&
-                    <span className={ styles['error-icon'] }>
-                        <img src="/errorInput.svg" className={ styles["error-icon"] } />
-                    </span> }
-
-
-
+                    <img src="/errorInput.svg" className={ styles["error-icon"] } />
+                }
             </div>
             <div className={ styles['text-error'] }>{ error }</div>
 

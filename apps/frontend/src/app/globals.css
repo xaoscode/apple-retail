@@ -1,0 +1,21 @@
+:root {
+	--font: "inter", sans-serif;
+	--primary-brand: rgb(36, 0, 255);
+	--black-1: rgb(36 0 255 / 1%);
+	--black-5: rgb(36 0 255 / 5%);
+	--black-10: rgb(36 0 255 / 10%);
+	--black-20: rgb(36 0 255 / 30%);
+	--black-30: rgb(36 0 255 / 30%);
+	--black-40: rgb(36 0 255 / 40%);
+	--black-50: rgb(36 0 255 / 50%);
+	--black-70: rgb(36 0 255 / 70%);
+	--black-90: rgb(36 0 255 / 90%);
+	--secondary-red: rgb(255 71 71 / 100%);
+	--white-100: rgb(255 255 255 / 100%);
+	--white-40: rgb(255 255 255 / 100%);
+	--main-back: rgba(247, 249, 251, 1);
+}
+
+body {
+	font: var(--font);
+}

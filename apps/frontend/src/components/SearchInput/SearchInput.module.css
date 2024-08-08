@@ -1,0 +1,39 @@
+.input-wrapper {
+	position: relative;
+
+	display: flex;
+	transition: background 0.25s;
+	align-items: center;
+}
+
+.input {
+	width: 100%;
+	padding: 16px 20px;
+
+	border: 1px solid var(--black-10);
+	border-radius: 16px;
+	outline: none;
+
+	&:disabled {
+		border: var(--black-10);
+
+		background: var(--black-5);
+	}
+
+	&:focus {
+		border: 1px solid var(--black-40);
+		box-shadow: 0 0 0 4px rgb(0 0 0 / 5%);
+	}
+
+	&:not(:disabled):hover {
+		border: 1px solid var(--black-40);
+	}
+}
+.in {
+	width: 100%;
+}
+
+.button {
+	position: absolute;
+	right: 8px;
+}

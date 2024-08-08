@@ -91,14 +91,17 @@
 	&:hover {
 		background: var(--black-5);
 	}
+	&:active {
+		background: linear-gradient(0deg, var(--black-10), var(--black-10));
+	}
 }
 
 .gray {
 	color: var(--primary-brand);
-	background-color: var(--black-5);
+	background-color: var(--black-10);
 
 	&:hover {
-		background: linear-gradient(0deg, var(--black-20), var(--black-20));
+		background: linear-gradient(0deg, var(--black-30), var(--black-30));
 	}
 
 	&:active {
@@ -125,7 +128,7 @@
 	background-color: var(--primary-brand);
 
 	&:hover {
-		background: linear-gradient(0deg, var(--black-90), var(--black-90));
+		background: linear-gradient(0deg, var(--black-70), var(--black-70));
 	}
 
 	&:active {

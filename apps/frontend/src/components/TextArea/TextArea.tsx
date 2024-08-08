@@ -50,7 +50,6 @@ export function TextArea({ error, value, onChange, className, ...props }: TextAr
                     rows={ 1 }
                 />
                 { error &&
-
                     <img src="/errorInput.svg" className={ styles["error-icon"] } />
                 }
             </div>

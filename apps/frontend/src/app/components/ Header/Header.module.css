@@ -1,0 +1,53 @@
+.header {
+	display: flex;
+	flex-direction: column;
+
+	/* background-color: rgb(169, 231, 248); */
+	background-color: var(--black-1);
+}
+.header1 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	/* background-color: rgb(169, 231, 248); */
+}
+.header2 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 10px;
+	gap: 10px;
+}
+.menu {
+	display: flex;
+	gap: 30px;
+}
+.auth {
+	display: flex;
+	gap: 10px;
+}
+
+.cart-button {
+	background-color: rgb(239, 34, 108);
+	border: none;
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&:hover {
+		background-color: rgb(247, 65, 131);
+		box-shadow: 0 0 0 4px rgb(247 65 131 / 30%);
+	}
+	&:active {
+		background: linear-gradient(0deg, rgb(239 34 108 / 60%), rgb(239 34 108 / 60%));
+	}
+}
+
+.cart-icon {
+	filter: invert(1);
+}
