@@ -28,6 +28,13 @@ export default function Home() {
       <Button size={ "medium" } design={ "filled" } icon={ "/Union.svg" } ></Button>
       <Button size={ "large" } design={ "filled" } icon={ "/Union.svg" } ></Button>
       <Button size={ "large" } design={ "outline" } icon={ "/Union.svg" } ></Button>
+      <Button size={ "small" } design={ "filled" } icon={ "/Union.svg" } >Button</Button>
+      <Button size={ "medium" } design={ "filled" } icon={ "/Union.svg" } >Button</Button>
+      <Button size={ "large" } design={ "filled" } icon={ "/Union.svg" } >Button</Button>
+      <Button size={ "small" } design={ "filled" } icon={ "/Union.svg" } ></Button>
+      <Button size={ "medium" } design={ "filled" } icon={ "/Union.svg" } ></Button>
+      <Button size={ "large" } design={ "filled" } icon={ "/Union.svg" } ></Button>
+      <Button size={ "large" } design={ "outline" } icon={ "/Union.svg" } ></Button>
     </main>
   );
 }

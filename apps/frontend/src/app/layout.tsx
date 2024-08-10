@@ -6,6 +6,7 @@ import styles from "./layout.module.css";
 import { Footer } from "./components/Footer/Footer";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Header } from "./components/ Header/Header";
+import { SmallHeader } from "./components/SmallHeader/SmallHeader";
 
 
 
@@ -28,17 +29,20 @@ export default function RootLayout({
     <html lang="ru">
       <body className={ DMSans.className }>
         <div className={ styles.wrapper }>
+          <SmallHeader className={ styles["small-header"] } />
           <Header className={ styles.header } />
           <Sidebar className={ styles.sidebar } />
           <div className={ styles.body }>
             { children }
           </div>
+
           <Footer className={ styles.footer }></Footer>
+
         </div>
-
-
+        <button className={ styles["sup-but"] }>dfsafdf</button>
 
       </body>
+
     </html>
   );
 }
