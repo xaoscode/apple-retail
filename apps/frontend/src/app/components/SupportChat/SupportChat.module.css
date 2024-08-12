@@ -7,6 +7,7 @@
 	border-radius: 20px;
 	box-shadow: 0 10px 20px rgb(177 175 175 / 40%);
 	margin-bottom: 65px;
+	background-color: var(--white-100);
 }
 
 .header-chat {
