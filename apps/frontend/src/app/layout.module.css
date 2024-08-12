@@ -1,7 +1,7 @@
 .wrapper {
 	display: grid;
 	grid-template:
-		". small-header small-header ." auto ". header header ." auto ". sidebar body ." 1fr "footer footer footer footer" auto / auto 230px minmax(320px, 1200px)
+		". small-header small-header ." auto ". header header ." auto ". body body ." 1fr "footer footer footer footer" auto / auto 230px minmax(320px, 1200px)
 		auto;
 	min-height: 100vh;
 	gap: 10px;
@@ -13,7 +13,7 @@
 	grid-area: header;
 	position: sticky;
 	top: 0;
-	z-index: 1000; /* Хедер находится поверх остальных элементов */
+	z-index: 1000;
 	background-color: var(--white-100);
 }
 
@@ -56,14 +56,4 @@
 	.header {
 		display: block;
 	}
-}
-
-.sup-but {
-	position: fixed;
-	border-radius: 50%;
-	background-color: var(--primary-brand);
-	bottom: 20px;
-	right: 20px;
-	height: 100px;
-	width: 100px;
 }

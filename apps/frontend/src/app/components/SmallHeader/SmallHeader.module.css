@@ -1,25 +1,10 @@
-.header {
+.small-header {
 	display: flex;
-	flex-direction: column;
-
-	/* background-color: rgb(169, 231, 248); */
+	justify-content: space-between;
+	align-items: center;
 	background-color: var(--black-1);
 }
-.header1 {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 
-	/* background-color: rgb(169, 231, 248); */
-}
-.header2 {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-
-	padding: 10px;
-	gap: 10px;
-}
 .menu {
 	display: flex;
 	gap: 30px;

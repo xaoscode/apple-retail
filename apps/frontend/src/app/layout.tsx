@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import styles from "./layout.module.css";
-
 import { Footer } from "./components/Footer/Footer";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Header } from "./components/ Header/Header";
 import { SmallHeader } from "./components/SmallHeader/SmallHeader";
-
+import Image from 'next/image'
+import { SupportChat } from "./components/SupportChat/SupportChat";
 
 
 const DMSans = Inter({
@@ -31,18 +31,13 @@ export default function RootLayout({
         <div className={ styles.wrapper }>
           <SmallHeader className={ styles["small-header"] } />
           <Header className={ styles.header } />
-          <Sidebar className={ styles.sidebar } />
           <div className={ styles.body }>
             { children }
           </div>
-
           <Footer className={ styles.footer }></Footer>
-
         </div>
-        <button className={ styles["sup-but"] }>dfsafdf</button>
-
+        <SupportChat />
       </body>
-
     </html>
   );
 }

@@ -1,18 +1,18 @@
 "use client"
 import { useState, useEffect, FormEvent } from "react";
 import { SupportChatProps } from "./SupportChat.props";
-
 import styles from "./SupportChat.module.css";
 import { Button } from "@/components/Button/Button";
 import { SubText } from "@/components/SubText/SubText";
 import { TextArea } from "@/components/TextArea/TextArea";
-import { socket } from "@/socket";
-
 import { IMessage } from "@repo/interfaces";
 import { Text } from "@/components/Text/Text";
+import Image from 'next/image'
+import cn from "classnames";
 
+import { io } from "socket.io-client";
 
-
+export const socket = io("http://localhost:3002");
 
 
 
@@ -22,7 +22,7 @@ interface Message {
     timestamp: Date
 }
 const userId = "2a6b5803-21d7-4982-afee-289a847288e7"
-export function SupportChat({ ...props }: SupportChatProps): JSX.Element {
+export function SupportChat({ className, ...props }: SupportChatProps): JSX.Element {
 
     const [isConnected, setIsConnected] = useState<boolean>(true);
     const [transport, setTransport] = useState("N/A");
@@ -30,43 +30,45 @@ export function SupportChat({ ...props }: SupportChatProps): JSX.Element {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [chatHistory, setChatHistory] = useState<Array<IMessage>>([])
 
-    useEffect(() => {
-        const roomId = userId;
-        if (socket.connected) {
-            onConnect();
-        }
-        function onConnect() {
+    const [chatActive, setChatActive] = useState(false)
 
-            socket.emit('joinRoom', roomId);
-            setIsConnected(true);
-        }
-        function onDisconnect() {
-            socket.emit('leaveRoom', roomId)
-            setIsConnected(false);
-            setTransport("N/A");
-        }
+    // useEffect(() => {
+    //     const roomId = userId;
+    //     if (socket.connected) {
+    //         onConnect();
+    //     }
+    //     function onConnect() {
 
-        socket.on("connect", onConnect);
-        socket.on("disconnect", onDisconnect);
+    //         socket.emit('joinRoom', roomId);
+    //         setIsConnected(true);
+    //     }
+    //     function onDisconnect() {
+    //         socket.emit('leaveRoom', roomId)
+    //         setIsConnected(false);
+    //         setTransport("N/A");
+    //     }
+
+    //     socket.on("connect", onConnect);
+    //     socket.on("disconnect", onDisconnect);
 
 
 
-        socket.on('joinedRoom', (messages: Array<IMessage>) => {
-            console.log("connected")
-            setChatHistory((prevHistory) => [...prevHistory, ...messages]);
-        });
+    //     socket.on('joinedRoom', (messages: Array<IMessage>) => {
+    //         console.log("connected")
+    //         setChatHistory((prevHistory) => [...prevHistory, ...messages]);
+    //     });
 
-        socket.on('newMessage', (message: IMessage) => {
-            setChatHistory((prevHistory) => [...prevHistory, message]);
-        });
+    //     socket.on('newMessage', (message: IMessage) => {
+    //         setChatHistory((prevHistory) => [...prevHistory, message]);
+    //     });
 
-        return () => {
-            // socket.off('joinedRoom');
-            // socket.off('newMessage');
-            socket.off("connect", onConnect);
-            socket.off("disconnect", onDisconnect);
-        };
-    }, []);
+    //     return () => {
+    //         // socket.off('joinedRoom');
+    //         // socket.off('newMessage');
+    //         socket.off("connect", onConnect);
+    //         socket.off("disconnect", onDisconnect);
+    //     };
+    // }, []);
 
 
 
@@ -88,58 +90,65 @@ export function SupportChat({ ...props }: SupportChatProps): JSX.Element {
             onSubmit(event as unknown as FormEvent<HTMLFormElement>)
         }
     }
+    function openChat() {
+        if (chatActive === true) {
+            setChatActive(false)
+        } else {
+            setChatActive(true)
+        }
 
+    }
 
     return (
-        <div className={ styles['modal-chat'] }>
-            <div className={ styles['header-chat'] }>
-                <Text size="2">Status: { isConnected ? "connected" : "loading" }</Text>
-                <Text size="2">AppleRetail</Text>
+        <div className={ cn(className, styles['chat-button']) }>
+            { chatActive && <div className={ styles['modal-chat'] }>
+                <div className={ styles['header-chat'] }>
+                    <Text size="2">Status: { isConnected ? "connected" : "loading" }</Text>
+                    <Text size="2">AppleRetail</Text>
 
 
-            </div>
-            { isConnected ? (
-                <div className={ styles['body-chat'] }>
-                    { chatHistory.map((message, idx) => (
-                        <div key={ idx } className={ styles['message-chat'] }>
-                            <img src="" alt="" className={ styles['message-avatar'] } />
-                            <div className={ styles['message'] }>
-                                { message.message_text }
-                            </div>
-                        </div>
-                    )) }
-                    <SubText size="1" className={ styles["warning"] }>
-                        Никому не сообщайте свои персональные данные
-                    </SubText>
                 </div>
-            ) : (
-                <div className={ styles['loading'] }>Loading...</div>
-            ) }
-            { isConnected && (
-                <form onSubmit={ onSubmit } className={ styles['actions-chat'] }>
-                    <Button icon={ "/Paperclip.svg" } size={ "large" } design={ "gray" }></Button>
-                    <TextArea
-                        onKeyDown={ handleKeyDown }
-                        onChange={ e => setValue(e.target.value) }
-                        value={ value }
-                        placeholder="Write something.."
-                        className={ styles['textarea'] }
+                { isConnected ? (
+                    <div className={ styles['body-chat'] }>
+                        { chatHistory.map((message, idx) => (
+                            <div key={ idx } className={ styles['message-chat'] }>
+                                <img src="" alt="" className={ styles['message-avatar'] } />
+                                <div className={ styles['message'] }>
+                                    { message.message_text }
+                                </div>
+                            </div>
+                        )) }
+                        <SubText size="1" className={ styles["warning"] }>
+                            Никому не сообщайте свои персональные данные
+                        </SubText>
+                    </div>
+                ) : (
+                    <div className={ styles['loading'] }>Loading...</div>
+                ) }
+                { isConnected && (
+                    <form onSubmit={ onSubmit } className={ styles['actions-chat'] }>
+                        <Button icon={ "/Paperclip.svg" } size={ "large" } design={ "gray" }></Button>
+                        <TextArea
+                            onKeyDown={ handleKeyDown }
+                            onChange={ e => setValue(e.target.value) }
+                            value={ value }
+                            placeholder="Write something.."
+                            className={ styles['textarea'] }
 
-                    />
-                    <Button
-                        type="submit"
-                        disabled={ isLoading }
-                        icon={ "/PaperPlaneRight.svg" }
-                        size={ "large" }
-                        design={ "gray" }>
-                    </Button>
-                </form>
-            )
+                        />
+                        <Button
+                            type="submit"
+                            disabled={ isLoading }
+                            icon={ "/PaperPlaneRight.svg" }
+                            size={ "large" }
+                            design={ "gray" }>
+                        </Button>
+                    </form>
+                )
+                }
+            </div >
             }
-
-        </div >
-
+            <button onClick={ openChat } className={ styles["sup-but"] }><Image className={ styles['chat'] } src={ "/chat.svg" } width={ 25 } height={ 25 } alt={ "chat" } /></button>
+        </div>
     );
-
-
 };

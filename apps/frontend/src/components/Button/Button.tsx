@@ -33,8 +33,6 @@ export function Button({ size, design, children, icon, className, ...props }: Bu
                 { icon && <img src={ icon } alt="icon" className={ styles['icon'] } /> }
                 { children }
             </div>
-
-
         </button>
 
     )

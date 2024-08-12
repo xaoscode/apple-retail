@@ -1,9 +1,38 @@
 .card {
 	border-radius: 32px;
 	box-shadow: 0 10px 20px rgb(177 175 175 / 40%);
+	padding: 20px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+	height: 700px;
+	width: 680px;
+}
+.menu {
+	margin: 100px;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	display: flex;
+	gap: 10px;
+}
+.form {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 100px;
+	gap: 16px;
+	width: 100%;
+	max-width: 400px;
+}
+
+.close {
+	float: right;
+}
+.extra {
+	margin-top: 20px;
+}
+
+.button {
+	height: 100%;
 }
