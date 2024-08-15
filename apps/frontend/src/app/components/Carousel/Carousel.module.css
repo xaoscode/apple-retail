@@ -1,51 +1,7 @@
-/* .news {
-	height: 200px;
-	width: 100%;
-	border-radius: 16px;
-	position: relative;
-	display: flex;
-	align-items: center;
-	overflow: hidden;
-}
-
-.right-button {
-	position: absolute;
-	right: 0;
-}
-.left-button {
-	position: absolute;
-}
-
-.content {
-	display: flex;
-	height: 100%;
-	width: 100%;
-	transition: transform 0.5s ease-in-out;
-	gap: 10px;
-	padding: 10px;
-}
-.product {
-	position: relative;
-	min-width: 23%;
-	border-radius: 16px;
-	background-color: var(--white-100);
-	padding: 10px;
-	box-shadow: 0 2px 2px 2px rgb(177 175 175 / 40%);
-}
-.img {
-	position: absolute;
-	height: 100%;
-	object-fit: contain;
-	border-radius: 16px;
-	right: 0;
-	bottom: 0;
-} */
-
 .carouselContainer {
 	position: relative;
-	width: 100%;
 	max-width: 100%;
-	margin: 0 auto;
+	width: 100%;
 	overflow: hidden;
 	border-radius: 16px;
 }
@@ -64,9 +20,7 @@
 }
 
 .product {
-	max-width: 22%;
-	max-height: 200px;
-	flex-shrink: 0;
+	flex: 1 0 calc(22% - 10px); /* 4 элемента на экран при полном размере */
 	background-color: #ffffff;
 	border-radius: 10px;
 	padding: 10px;
@@ -75,13 +29,12 @@
 	flex-direction: row;
 	justify-content: space-between;
 	gap: 10px;
-	&:hover {
-		background-color: rgb(228, 228, 228);
-	}
 }
 
 .img {
-	height: 100%;
+	width: 100%;
+	height: auto;
+	max-height: 200px;
 	object-fit: contain;
 	border-radius: 16px;
 }
@@ -91,17 +44,16 @@
 	flex-direction: column;
 	justify-content: space-between;
 }
+
 .scrollButton {
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	background-color: rgba(0, 0, 0, 0.5);
 	color: white;
 	border: none;
 	padding: 10px;
 	cursor: pointer;
 	z-index: 10;
-	border-radius: 50%;
 }
 
 .leftButton {
@@ -114,4 +66,23 @@
 
 .scrollButton:hover {
 	background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Медиа-запросы для адаптации к разным экранам */
+@media (max-width: 1200px) {
+	.product {
+		flex: 1 0 calc(33.33% - 10px); /* 3 элемента на экран */
+	}
+}
+
+@media (max-width: 800px) {
+	.product {
+		flex: 1 0 calc(50% - 10px); /* 2 элемента на экран */
+	}
+}
+
+@media (max-width: 500px) {
+	.product {
+		flex: 1 0 calc(100% - 10px); /* 1 элемент на экран */
+	}
 }

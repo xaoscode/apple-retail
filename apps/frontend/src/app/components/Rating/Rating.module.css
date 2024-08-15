@@ -1,0 +1,7 @@
+.filled {
+	fill: var(--primary-brand);
+}
+
+.star {
+	margin-right: 5px;
+}

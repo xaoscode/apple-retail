@@ -17,7 +17,7 @@ export const AuthCard = ({ ...props }: AuthCardProps): JSX.Element => {
             setActiveCard(true)
         }
     }
-    return (<div>
+    return (<div { ...props }>
         { activeCard && <div className={ styles['card'] }>
             <Button onClick={ openCard } className={ styles['close'] } size="small" design="borderless" icon="/close.svg"></Button>
 
