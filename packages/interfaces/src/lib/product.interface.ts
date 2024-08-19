@@ -4,4 +4,7 @@ export interface IProduct {
 	name: string;
 	ram: number;
 	memory: number;
+	img: string;
+	cost: number;
+	discountPercentage: number;
 }

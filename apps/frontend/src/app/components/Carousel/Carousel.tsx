@@ -1,83 +1,11 @@
 import { CarouselProps } from "./Carousel.props";
 import styles from "./Carousel.module.css";
-import { Button } from "@/components/Button/Button";
 import Image from "next/image";
-import { RefObject, useRef, useState } from "react";
-import { IProduct } from '@repo/interfaces';
-import { Text } from "@/components/Text/Text";
+import { useRef } from "react";
+import cn from "classnames"
 
-const ar = [
-    {
-        id: "asdfsfsdf",
-        category: "phone",
-        name: "iPhone 14",
-        ram: "6",
-        memory: "256",
-        image: "/iphone13pro.jpg"
-    },
-    {
-        id: "asdffasdfasdfsfsdf",
-        category: "phone",
-        name: "iPhone 15",
-        ram: "6",
-        memory: "256",
-        image: "/iphone14pro.jpg"
 
-    },
-    {
-        id: "asdfsfsdf",
-        category: "phone",
-        name: "iPhone 14",
-        ram: "6",
-        memory: "256",
-        image: "/iphone13pro.jpg"
-    },
-    {
-        id: "asdffasdfasdfsfsdf",
-        category: "phone",
-        name: "iPhone 15",
-        ram: "6",
-        memory: "256",
-        image: "/iphone14pro.jpg"
-
-    },
-    {
-        id: "asdfsfsdf",
-        category: "phone",
-        name: "iPhone 14",
-        ram: "6",
-        memory: "256",
-        image: "/iphone13pro.jpg"
-    },
-    {
-        id: "asdffasdfasdfsfsdf",
-        category: "phone",
-        name: "iPhone 15",
-        ram: "6",
-        memory: "256",
-        image: "/iphone14pro.jpg"
-
-    },
-    {
-        id: "asdfsfsdf",
-        category: "phone",
-        name: "iPhone 14",
-        ram: "6",
-        memory: "256",
-        image: "/iphone13pro.jpg"
-    },
-    {
-        id: "asdffasdfasdfsfsdf",
-        category: "phone",
-        name: "iPhone 15",
-        ram: "6",
-        memory: "256",
-        image: "/iphone14pro.jpg"
-
-    }
-]
-export const Carousel = ({ ...props }: CarouselProps): JSX.Element => {
-    const [newsImages, setNewsImages] = useState(ar);
+export const Carousel = ({ visable, background, renderProduct, products, ...props }: CarouselProps) => {
 
     const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -85,11 +13,38 @@ export const Carousel = ({ ...props }: CarouselProps): JSX.Element => {
         if (carouselRef.current) {
             const productElement = carouselRef.current.querySelector(`.${styles.product}`);
             if (productElement instanceof HTMLElement) {
-                const productWidth = productElement.offsetWidth;
-                carouselRef.current.scrollBy({
-                    left: direction * productWidth,
-                    behavior: 'smooth',
-                });
+                const productWidth = productElement.offsetWidth + 10;
+                const scrollPosition = carouselRef.current.scrollLeft;
+                const maxScrollPosition = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+                if (direction === 1) {
+                    if (scrollPosition + 1 > maxScrollPosition) {
+                        carouselRef.current.scrollTo({
+                            left: 0,
+                            behavior: 'smooth',
+                        });
+                    } else {
+                        carouselRef.current.scrollBy({
+                            left: direction * productWidth,
+                            behavior: 'smooth',
+                        });
+                    }
+                }
+
+                if (direction === -1) {
+                    if (scrollPosition === 0) {
+                        carouselRef.current.scrollTo({
+                            left: maxScrollPosition,
+                            behavior: 'smooth',
+                        });
+                    } else {
+                        carouselRef.current.scrollBy({
+                            left: direction * productWidth,
+                            behavior: 'smooth',
+                        });
+                    }
+                }
+                console.log(scrollPosition)
+
             }
         }
     };
@@ -98,20 +53,20 @@ export const Carousel = ({ ...props }: CarouselProps): JSX.Element => {
     const scrollRight = () => scrollByProductWidth(1);
 
     return (
-        <div { ...props } className={ styles.carouselContainer }>
-            <Button icon="/left-arrow.svg" size="medium" design="gray" onClick={ scrollLeft } className={ `${styles.scrollButton} ${styles.leftButton}` }></Button>
-            <div className={ styles.carousel } ref={ carouselRef }>
-                { newsImages.map((product, index) => (
-                    <div key={ index } className={ styles.product }>
-                        <div className={ styles['action'] }>
-                            <Text size={ "3" } >{ product.name }</Text>
-                            <Button size="small" design="filled">Купить</Button>
-                        </div>
-                        <Image width={ 300 } height={ 300 } className={ styles['img'] } src={ product.image } alt={ product.name } />
+        visable && <div { ...props } className={ cn(styles.carouselContainer, { [styles.carouselBack]: background }) }>
+            <button onClick={ scrollLeft } className={ `${styles.scrollButton} ${styles.leftButton}` } >
+                <Image width={ 25 } height={ 25 } src={ "/left-arrow.svg" } alt={ "left-arrow" } />
+            </button>
+            <div className={ cn(styles.carousel) } ref={ carouselRef }>
+                { products.map((product, index) => (
+                    <div key={ index } className={ cn(styles.product, { [styles.back]: background }) }  >
+                        { renderProduct(product, index) }
                     </div>
                 )) }
             </div>
-            <Button icon="/right-arrow.svg" size="medium" design="gray" onClick={ scrollRight } className={ `${styles.scrollButton} ${styles.rightButton}` }></Button>
-        </div>
+            <button onClick={ scrollRight } className={ `${styles.scrollButton} ${styles.rightButton}` } >
+                <Image width={ 25 } height={ 25 } src={ "/right-arrow.svg" } alt={ "right-arrow" } />
+            </button>
+        </div >
     );
 };

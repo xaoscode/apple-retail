@@ -112,7 +112,7 @@ export function SupportChat({ className, ...props }: SupportChatProps): JSX.Elem
                     <div className={ styles['body-chat'] }>
                         { chatHistory.map((message, idx) => (
                             <div key={ idx } className={ styles['message-chat'] }>
-                                <img src="" alt="" className={ styles['message-avatar'] } />
+                                <Image src="" alt="" className={ styles['message-avatar'] } />
                                 <div className={ styles['message'] }>
                                     { message.message_text }
                                 </div>

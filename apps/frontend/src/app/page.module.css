@@ -4,3 +4,78 @@
 	flex-direction: column;
 	align-items: center;
 }
+
+.product-history {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.action-wrap-history {
+	display: flex;
+	align-content: space-between;
+}
+.offer {
+	height: 32px;
+	width: 32px;
+}
+.trash-button {
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--black-20);
+
+	&:hover {
+		background: var(--black-40);
+	}
+	&:active {
+		background: linear-gradient(0deg, var(--black-30), var(--black-30));
+	}
+}
+
+.text {
+	font-size: 18px;
+}
+
+.product-with-discount {
+	display: flex;
+	padding: 0 10px;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.description-text {
+	font-size: 14px;
+	line-height: 20px;
+}
+.cost-wrap {
+	display: flex;
+	gap: 10px;
+	align-items: flex-end;
+}
+.cost-text {
+	font-size: 22px;
+	line-height: 24px;
+	color: var(--primary-brand);
+}
+.cost-with-discount-text {
+	font-size: 12px;
+	line-height: 14px;
+	text-decoration: line-through;
+	color: rgb(114, 114, 114);
+}
+.action-wrap {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+.action {
+	display: flex;
+	gap: 10px;
+}

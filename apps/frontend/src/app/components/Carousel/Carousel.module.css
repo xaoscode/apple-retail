@@ -4,6 +4,13 @@
 	width: 100%;
 	overflow: hidden;
 	border-radius: 16px;
+	background-color: #ffffff;
+	box-shadow: 0 1px 5px 1px rgb(177 175 175 / 40%);
+}
+
+.carouselContainer.carouselBack {
+	background: rgb(255, 255, 255);
+	box-shadow: none;
 }
 
 .carousel {
@@ -20,29 +27,15 @@
 }
 
 .product {
-	flex: 1 0 calc(22% - 10px); /* 4 элемента на экран при полном размере */
+	flex: 1 0 calc(25% - 7px);
 	background-color: #ffffff;
-	border-radius: 10px;
-	padding: 10px;
+	padding: 10px 0;
+}
+
+.product.back {
 	box-shadow: 0 1px 5px 1px rgb(177 175 175 / 40%);
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+	border-radius: 10px;
 	gap: 10px;
-}
-
-.img {
-	width: 100%;
-	height: auto;
-	max-height: 200px;
-	object-fit: contain;
-	border-radius: 16px;
-}
-
-.action {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
 }
 
 .scrollButton {
@@ -54,6 +47,22 @@
 	padding: 10px;
 	cursor: pointer;
 	z-index: 10;
+
+	opacity: 0;
+	pointer-events: none;
+
+	background-color: #ffffff;
+	box-shadow: 0 1px 5px 1px rgb(177 175 175 / 40%);
+	border-radius: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 0.2s;
+}
+
+.carouselContainer:hover .scrollButton {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 .leftButton {
@@ -65,24 +74,24 @@
 }
 
 .scrollButton:hover {
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(238, 238, 238, 0.9);
+	padding: 13px;
 }
 
-/* Медиа-запросы для адаптации к разным экранам */
-@media (max-width: 1200px) {
+@media (max-width: 950px) {
 	.product {
-		flex: 1 0 calc(33.33% - 10px); /* 3 элемента на экран */
+		flex: 1 0 calc(33.33% - 7px);
 	}
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
 	.product {
-		flex: 1 0 calc(50% - 10px); /* 2 элемента на экран */
+		flex: 1 0 calc(50% - 7px);
 	}
 }
 
 @media (max-width: 500px) {
 	.product {
-		flex: 1 0 calc(100% - 10px); /* 1 элемент на экран */
+		flex: 1 0 calc(100% - 7px);
 	}
 }

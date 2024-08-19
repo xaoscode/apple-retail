@@ -1,6 +1,7 @@
 import { ButtonProps } from "./Button.props";
 import styles from "./Button.module.css"
 import cn from "classnames";
+import Image from "next/image";
 
 export function Button({ size, design, children, icon, className, ...props }: ButtonProps): JSX.Element {
     return (
@@ -30,7 +31,7 @@ export function Button({ size, design, children, icon, className, ...props }: Bu
 
         >
             <div className={ styles["positions"] }>
-                { icon && <img src={ icon } alt="icon" className={ styles['icon'] } /> }
+                { icon && <Image src={ icon } alt="icon" className={ styles.icon } width={ 32 } height={ 32 } /> }
                 { children }
             </div>
         </button>

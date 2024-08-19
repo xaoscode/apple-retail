@@ -1,7 +1,19 @@
-.filled {
+.rating-container {
+	border: 1px solid var(--black-10);
+	border-radius: 16px;
+
+	&:hover {
+		background: var(--black-10);
+	}
+}
+.filled svg {
 	fill: var(--primary-brand);
 }
 
-.star {
+.star svg {
 	margin-right: 5px;
+	border: none;
+}
+.editable {
+	cursor: pointer;
 }

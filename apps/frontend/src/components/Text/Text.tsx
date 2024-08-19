@@ -6,7 +6,7 @@ export function Text({ size, children, className, ...props }: TextProps): JSX.El
     return (
 
         <div className={
-            cn(styles["header"],
+            cn(className, styles["header"],
                 {
                     [styles["h1"]]: size === "1",
                     [styles["h2"]]: size === "2",
