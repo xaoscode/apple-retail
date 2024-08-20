@@ -2,12 +2,11 @@
 import styles from "./Rating.module.css";
 import { RatingProps } from "./Rating.props";
 import { useEffect, useState, KeyboardEvent } from "react";
-
 import cn from "classnames"
-import StarIcon from '../../../../public/star.svg'
+import StarIcon from '../../../public/star.svg'
 
 
-export const Rating = ({ isEditable = false, rating, setRating, ...props }: RatingProps): JSX.Element => {
+export const Rating = ({ reviewNum, isEditable = false, rating, setRating, ...props }: RatingProps): JSX.Element => {
     const [ratingArray, setRatingArrray] = useState<JSX.Element[]>(new Array(5).fill(<></>));
 
     useEffect(() => {
@@ -24,7 +23,7 @@ export const Rating = ({ isEditable = false, rating, setRating, ...props }: Rati
                     onMouseEnter={ () => onHover(i + 1) }
                     onMouseLeave={ () => onHover(rating) }
                     onClick={ () => onClick(i + 1) }>
-                    <StarIcon
+                    <StarIcon className={ styles['icon'] }
                     // tabIndex={ isEditable ? 0 : -1 }
                     // onKeyDown={ (e: KeyboardEvent<SVGElement>) => isEditable && handleSpace(i + 1, e) }
                     />
@@ -54,8 +53,9 @@ export const Rating = ({ isEditable = false, rating, setRating, ...props }: Rati
 
     }
     return (
-        <div { ...props } className={ styles["rating-container"] }>
-            { ratingArray.map((r, i) => (<span key={ i }>{ r }</span>)) }
-        </div>
+        <div { ...props } className={ styles['rating'] }  >
+            { ratingArray.map((r, i) => (<span className={ styles['a'] } key={ i } >{ r }</span>)) }
+            <div className={ styles['review-num'] }>{ reviewNum }</div>
+        </div >
     )
 }

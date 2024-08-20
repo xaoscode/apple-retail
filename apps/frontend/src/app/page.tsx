@@ -9,12 +9,14 @@ import { SupportChat } from "./components/SupportChat/SupportChat";
 import { Text } from '@/components/Text/Text'
 import { AuthCard } from "./components/LoginCard/AuthCard";
 import { Carousel } from "./components/Carousel/Carousel";
-import { Rating } from "@/app/components/Rating/Rating";
+import { Rating } from "@/components/Rating/Rating";
 import { IProduct } from "@repo/interfaces";
 import { HeartButton } from "@/components/HeartButton/HeartButton";
 import { useState } from "react";
 import { Metadata } from "next";
 import { trace } from "console";
+import { CartButton } from "@/components/CartButton/CartButton";
+import { PricePanel } from "@/components/PricePanel/PricePanel";
 
 const ar = [
   {
@@ -25,7 +27,7 @@ const ar = [
     memory: 256,
     img: "/iphone13pro.jpg",
     cost: 55000,
-    discountPercentage: 20
+    discountPercentage: 0
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -103,7 +105,7 @@ const ar = [
 export default function Home() {
   const [rating, setRating] = useState<number>(4)
 
-  function calcDiscount(cost: number, percentage: number): number {
+  const calcDiscount = (cost: number, percentage: number): number => {
     return cost - (cost * percentage / 100)
   }
 
@@ -150,7 +152,11 @@ export default function Home() {
             </button>
           </div>
           <p className={ styles.text }>Смартфон iPhone 14, 256Гб, [32гб]  </p>
-          <Rating rating={ rating } isEditable={ true } setRating={ setRating } />
+          <Rating reviewNum={ 10 } rating={ rating } isEditable={ false } setRating={ setRating } />
+          <div className={ styles['actions'] }>
+            <PricePanel cost={ product.cost } discountPercentage={ product.discountPercentage }></PricePanel>
+            <CartButton activated={ false }></CartButton>
+          </div>
 
         </div>
       } } />

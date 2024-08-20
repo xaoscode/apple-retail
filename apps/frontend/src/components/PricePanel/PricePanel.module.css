@@ -1,0 +1,24 @@
+.price-panel {
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	background: linear-gradient(to left, var(--blue-10), white);
+}
+
+.cost-wrap {
+	display: flex;
+	gap: 3px;
+	align-items: flex-end;
+}
+
+.cost-text {
+	font-size: 22px;
+	color: var(--primary-brand);
+}
+
+.cost-with-discount-text {
+	font-size: 12px;
+	text-decoration: line-through;
+	color: rgb(114, 114, 114);
+}

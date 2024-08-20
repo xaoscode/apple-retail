@@ -1,0 +1,29 @@
+.rating {
+	border: 1px solid var(--black-20);
+	border-radius: 10px;
+	width: max-content;
+	font-size: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+
+	&:hover {
+		border: 1px solid var(--primary-brand);
+	}
+}
+.filled svg {
+	fill: var(--primary-brand);
+}
+
+.star svg {
+	margin-right: 5px;
+	border: none;
+}
+.editable {
+	cursor: pointer;
+}
+.review-num {
+	font-size: 14px;
+	color: var(--black-50);
+}

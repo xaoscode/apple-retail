@@ -8,13 +8,14 @@
 .product-history {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	padding: 0 10px;
+	gap: 10px;
 }
 
 .action-wrap-history {
 	display: flex;
 	align-content: space-between;
+	justify-content: center;
 }
 .offer {
 	height: 32px;
@@ -76,6 +77,11 @@
 	justify-content: space-between;
 }
 .action {
+	display: flex;
+	gap: 10px;
+}
+
+.actions {
 	display: flex;
 	gap: 10px;
 }
