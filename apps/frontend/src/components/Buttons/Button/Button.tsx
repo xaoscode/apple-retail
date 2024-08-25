@@ -31,7 +31,8 @@ export function Button({ size, design, children, icon, className, ...props }: Bu
 
         >
             <div className={ styles["positions"] }>
-                { icon && <Image src={ icon } alt="icon" className={ styles.icon } width={ 32 } height={ 32 } /> }
+                { icon &&
+                    <Image src={ icon } alt="icon" className={ styles.icon } width={ 32 } height={ 32 } /> }
                 { children }
             </div>
         </button>

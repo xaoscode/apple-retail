@@ -1,4 +1,4 @@
-import { Button } from "@/components/Button/Button";
+import { Button } from "@/components/Buttons/Button/Button";
 import styles from "./SmallHeader.module.css";
 import cn from "classnames";
 import Image from 'next/image'

@@ -4,6 +4,7 @@
 	align-items: center;
 	padding: 10px;
 	background: linear-gradient(to left, var(--blue-10), white);
+	width: 150px;
 }
 
 .cost-wrap {
@@ -13,11 +14,17 @@
 }
 
 .cost-text {
-	font-size: 22px;
+	font: var(--font);
+	font-weight: 600;
+	font-size: 20px;
+}
+
+.cost-text.color {
 	color: var(--primary-brand);
 }
 
 .cost-with-discount-text {
+	font: var(--font);
 	font-size: 12px;
 	text-decoration: line-through;
 	color: rgb(114, 114, 114);

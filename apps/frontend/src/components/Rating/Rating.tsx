@@ -52,10 +52,21 @@ export const Rating = ({ reviewNum, isEditable = false, rating, setRating, ...pr
         setRating(i)
 
     }
+
+    const formatReviewNum = (reviewNum: number | undefined) => {
+        if (!reviewNum) {
+            return
+        }
+        if (reviewNum > 999) {
+            return parseFloat((reviewNum / 100).toFixed(1));
+        }
+        return reviewNum
+    }
+
     return (
         <div { ...props } className={ styles['rating'] }  >
             { ratingArray.map((r, i) => (<span className={ styles['a'] } key={ i } >{ r }</span>)) }
-            <div className={ styles['review-num'] }>{ reviewNum }</div>
+            <div className={ styles['review-num'] }>{ formatReviewNum(reviewNum) }</div>
         </div >
     )
 }

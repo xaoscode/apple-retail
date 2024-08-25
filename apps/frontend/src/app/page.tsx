@@ -1,22 +1,17 @@
 "use client"
 import Image from "next/image";
 import styles from "./page.module.css";
-import { Button } from "@/components/Button/Button";
-import { Input } from "@/components/Input/Input";
-import { SubText } from "@/components/SubText/SubText";
-import { TextArea } from "@/components/TextArea/TextArea";
-import { SupportChat } from "./components/SupportChat/SupportChat";
+import { Button } from "@/components/Buttons/Button/Button";
 import { Text } from '@/components/Text/Text'
-import { AuthCard } from "./components/LoginCard/AuthCard";
-import { Carousel } from "./components/Carousel/Carousel";
+import { Carousel } from "../components/Carousel/Carousel";
 import { Rating } from "@/components/Rating/Rating";
 import { IProduct } from "@repo/interfaces";
-import { HeartButton } from "@/components/HeartButton/HeartButton";
+import { HeartButton } from "@/components/Buttons/HeartButton/HeartButton";
 import { useState } from "react";
-import { Metadata } from "next";
-import { trace } from "console";
-import { CartButton } from "@/components/CartButton/CartButton";
+import { CartButton } from "@/components/Buttons/CartButton/CartButton";
 import { PricePanel } from "@/components/PricePanel/PricePanel";
+import Link from "next/link";
+import TrashIcon from "../../public/trash.svg"
 
 const ar = [
   {
@@ -27,7 +22,8 @@ const ar = [
     memory: 256,
     img: "/iphone13pro.jpg",
     cost: 55000,
-    discountPercentage: 0
+    discountPercentage: 0,
+    reviewNum: 1234
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -37,7 +33,8 @@ const ar = [
     memory: 256,
     img: "/iphone14pro.jpg",
     cost: 55000,
-    discountPercentage: 20
+    discountPercentage: 20,
+    reviewNum: 345
   },
   {
     id: "asdfsfsdf",
@@ -47,7 +44,8 @@ const ar = [
     memory: 256,
     img: "/iphone13pro.jpg",
     cost: 55000,
-    discountPercentage: 20
+    discountPercentage: 0,
+    reviewNum: 1234
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -57,7 +55,8 @@ const ar = [
     memory: 256,
     img: "/iphone14pro.jpg",
     cost: 55000,
-    discountPercentage: 20
+    discountPercentage: 20,
+    reviewNum: 345
   },
   {
     id: "asdfsfsdf",
@@ -67,7 +66,8 @@ const ar = [
     memory: 256,
     img: "/iphone13pro.jpg",
     cost: 55000,
-    discountPercentage: 20
+    discountPercentage: 0,
+    reviewNum: 1234
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -77,7 +77,8 @@ const ar = [
     memory: 256,
     img: "/iphone14pro.jpg",
     cost: 55000,
-    discountPercentage: 20
+    discountPercentage: 20,
+    reviewNum: 345
   },
   {
     id: "asdfsfsdf",
@@ -87,7 +88,8 @@ const ar = [
     memory: 256,
     img: "/iphone13pro.jpg",
     cost: 55000,
-    discountPercentage: 20
+    discountPercentage: 0,
+    reviewNum: 1234
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -97,8 +99,31 @@ const ar = [
     memory: 256,
     img: "/iphone14pro.jpg",
     cost: 55000,
-    discountPercentage: 20
-  }
+    discountPercentage: 20,
+    reviewNum: 345
+  },
+  {
+    id: "asdfsfsdf",
+    category: "phone",
+    name: "iPhone 14",
+    ram: 6,
+    memory: 256,
+    img: "/iphone13pro.jpg",
+    cost: 55000,
+    discountPercentage: 0,
+    reviewNum: 1234
+  },
+  {
+    id: "asdffasdfasdfsfsdf",
+    category: "phone",
+    name: "iPhone 15",
+    ram: 6,
+    memory: 256,
+    img: "/iphone14pro.jpg",
+    cost: 55000,
+    discountPercentage: 20,
+    reviewNum: 345
+  },
 ]
 
 
@@ -124,7 +149,7 @@ export default function Home() {
         return <div className={ styles["product-with-discount"] }>
 
           <Text size={ "3" }>Скидка</Text>
-          <p className={ styles["description-text"] }>Смартфон iPhone 14, 256Гб, [32гб] </p>
+          <div className={ styles["description-text"] }>Смартфон { product.name }, { product.memory }Гб, [{ product.ram }гб] </div>
           <div className={ styles["cost-wrap"] }>
             <div className={ styles["cost-text"] } >{ product.cost } ₽</div>
             <div className={ styles["cost-with-discount-text"] }>
@@ -141,25 +166,29 @@ export default function Home() {
         </div>
       } } />
 
-      <Carousel background={ false } products={ ar } visable={ true } renderProduct={ function (product: IProduct, index: number): JSX.Element {
-        return <div className={ styles["product-history"] }>
-          <div className={ styles['action-wrap-history'] }>
-            <div className={ styles["offer"] }>
+      < Carousel background={ false } products={ ar } visable={ true } renderProduct={
+        function (product: IProduct, index: number): JSX.Element {
+          return <div className={ styles["product-history"] }>
+            <div className={ styles['action-wrap-history'] }>
+              <div className={ styles["offer"] }>
+              </div>
+              <Image width={ 160 } height={ 160 } src={ product.img } alt={ product.name } />
+              <button className={ styles['trash-button'] }>
+                <TrashIcon></TrashIcon>
+              </button>
             </div>
-            <Image width={ 160 } height={ 160 } src={ product.img } alt={ product.name } />
-            <button className={ styles['trash-button'] }>
-              <Image width={ 20 } height={ 20 } src={ "trash.svg" } alt={ "trash" }></Image>
-            </button>
-          </div>
-          <p className={ styles.text }>Смартфон iPhone 14, 256Гб, [32гб]  </p>
-          <Rating reviewNum={ 10 } rating={ rating } isEditable={ false } setRating={ setRating } />
-          <div className={ styles['actions'] }>
-            <PricePanel cost={ product.cost } discountPercentage={ product.discountPercentage }></PricePanel>
-            <CartButton activated={ false }></CartButton>
-          </div>
+            <p className={ styles.text }>Смартфон iPhone 14, 256Гб, [32гб]  </p>
+            <Link className={ styles.link } href={ "/cart" }>
+              <Rating reviewNum={ product.reviewNum } rating={ rating } isEditable={ false } setRating={ setRating } />
+            </Link>
+            <div className={ styles['actions'] }>
+              <PricePanel cost={ product.cost } discountPercentage={ product.discountPercentage }></PricePanel>
+              <CartButton activated={ false }></CartButton>
+            </div>
 
-        </div>
-      } } />
-    </main>
+          </div>
+        }
+      } />
+    </main >
   );
 }

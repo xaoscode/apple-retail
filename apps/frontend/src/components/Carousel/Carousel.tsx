@@ -53,7 +53,8 @@ export const Carousel = ({ visable, background, renderProduct, products, ...prop
     const scrollRight = () => scrollByProductWidth(1);
 
     return (
-        visable && <div { ...props } className={ cn(styles.carouselContainer, { [styles.carouselBack]: background }) }>
+        visable &&
+        <div { ...props } className={ cn(styles.carouselContainer, { [styles.carouselBack]: background }) }>
             <button onClick={ scrollLeft } className={ `${styles.scrollButton} ${styles.leftButton}` } >
                 <Image width={ 25 } height={ 25 } src={ "/left-arrow.svg" } alt={ "left-arrow" } />
             </button>

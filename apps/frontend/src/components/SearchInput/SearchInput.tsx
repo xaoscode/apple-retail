@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { SearchInputProps } from "./SearchInput.props";
 import styles from "./SearchInput.module.css";
 import cn from "classnames";
-import { Button } from "../Button/Button";
+import { Button } from "../Buttons/Button/Button";
 import { SubText } from '../SubText/SubText';
 
 export function SearchInput({ className, ...props }: SearchInputProps): JSX.Element {
@@ -57,9 +57,7 @@ export function SearchInput({ className, ...props }: SearchInputProps): JSX.Elem
                     onFocus={ handleFocus }
                     onChange={ inputChange }
                 />
-                <Button className={ styles['button'] } size="small" design="borderless">
-                    <img src="/search.svg" alt="search" />
-                </Button>
+                <Button className={ styles['button'] } size="medium" design="borderless" icon='/search.svg'></Button>
             </form>
             { historyVisible && (
                 <div className={ styles['history'] }>

@@ -1,0 +1,19 @@
+.stockStatus {
+	text-align: center;
+}
+
+.inStock {
+	color: green;
+}
+
+.availableForOrder {
+	color: orange;
+}
+
+.outOfStock {
+	color: red;
+}
+
+.comingSoon {
+	color: blue;
+}

@@ -9,7 +9,6 @@ import { SmallHeader } from "./components/SmallHeader/SmallHeader";
 import Image from 'next/image'
 import { SupportChat } from "./components/SupportChat/SupportChat";
 
-
 const DMSans = Inter({
   subsets: ['latin'],
   display: 'swap',

@@ -3,49 +3,32 @@ import Image from 'next/image'
 import { TextAreaProps } from "./TextArea.props";
 import styles from "./TextArea.module.css"
 import cn from "classnames";
-import { useEffect, useRef, useState } from "react";
+import { ForwardedRef, forwardRef, useEffect, useRef, useState } from "react";
 
-export function TextArea({ error, value, onChange, className, ...props }: TextAreaProps): JSX.Element {
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
-    const [textareaHeight, setTextareaHeight] = useState('auto');
+export const TextArea = forwardRef(({ error, value, className, ...props }: TextAreaProps, ref: ForwardedRef<HTMLTextAreaElement>): JSX.Element => {
 
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        const { current } = textareaRef;
-        if (current) {
-            current.style.height = 'auto';
-            current.style.height = `${current.scrollHeight - 30}px`;
-            setTextareaHeight(`${current.scrollHeight - 30}px`);
+        const target = event.target
 
-
-            if (current.value.trim() === '') {
-                current.style.height = 'auto';
-                setTextareaHeight('auto');
+        if (target) {
+            target.style.height = 'auto';
+            target.style.height = `${target.scrollHeight - 30}px`;
+            if (target.value.trim() === '') {
+                target.style.height = 'auto';
             }
-        }
-        if (onChange) {
-            onChange(event);
         }
     };
 
-    useEffect(() => {
-        const { current } = textareaRef;
-        if (current) {
-            current.style.height = 'auto';
-            current.style.height = `${current.scrollHeight - 30}px`;
-        }
-    }, [value]);
+
 
     return (
         <div className={ className }>
             <div className={ cn(styles["input-wrapper"]) }>
                 <textarea
-                    ref={ textareaRef }
+                    ref={ ref }
                     className={ cn(styles["input"], { [styles["error"]]: error }) }
-                    style={ { height: textareaHeight } }
-                    onChange={ handleChange }
-
-                    value={ value }
+                    onInput={ handleChange }
                     { ...props }
                     rows={ 1 }
                 />
@@ -57,6 +40,7 @@ export function TextArea({ error, value, onChange, className, ...props }: TextAr
 
         </div>
     )
-}
+})
 
 
+TextArea.displayName = 'TextArea';

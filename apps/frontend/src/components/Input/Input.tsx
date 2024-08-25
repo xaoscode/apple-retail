@@ -1,14 +1,15 @@
 import { InputProps } from "./Input.props";
 import styles from "./Input.module.css"
 import cn from "classnames";
-import { Button } from "../Button/Button";
+import { Button } from "../Buttons/Button/Button";
+import { ForwardedRef, forwardRef } from "react";
 
-export function Input({ className, error, ...props }: InputProps): JSX.Element {
+export const Input = forwardRef(({ className, error, ...props }: InputProps, ref: ForwardedRef<HTMLInputElement>): JSX.Element => {
     return (
         <div className={ cn(styles['in'], className) }>
 
             <div className={ styles["input-wrapper"] }>
-                <input className={ cn(styles['input'], { [styles['error']]: error }) } { ...props } />
+                <input ref={ ref } className={ cn(styles['input'], { [styles['error']]: error }) } { ...props } />
                 { error &&
                     <img src="/errorInput.svg" className={ styles["error-icon"] } />
                 }
@@ -17,6 +18,6 @@ export function Input({ className, error, ...props }: InputProps): JSX.Element {
 
         </div>
     )
-}
+})
 
-
+Input.displayName = 'Input';

@@ -29,13 +29,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: var(--black-20);
-
-	&:hover {
-		background: var(--black-40);
-	}
-	&:active {
-		background: linear-gradient(0deg, var(--black-30), var(--black-30));
+	background: var(--black-10);
+	cursor: pointer;
+	&:hover svg {
+		fill: var(--primary-brand);
 	}
 }
 
@@ -51,8 +48,9 @@
 }
 
 .description-text {
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 20px;
+	padding-top: 5px;
 }
 .cost-wrap {
 	display: flex;
@@ -68,7 +66,7 @@
 	font-size: 12px;
 	line-height: 14px;
 	text-decoration: line-through;
-	color: rgb(114, 114, 114);
+	color: var(--black-30);
 }
 .action-wrap {
 	display: flex;
@@ -84,4 +82,8 @@
 .actions {
 	display: flex;
 	gap: 10px;
+}
+
+.link {
+	text-decoration: none;
 }

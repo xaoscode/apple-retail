@@ -1,0 +1,6 @@
+.text {
+	cursor: pointer;
+	&:hover {
+		color: var(--primary-brand);
+	}
+}

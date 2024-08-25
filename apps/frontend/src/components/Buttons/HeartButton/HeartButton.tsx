@@ -4,8 +4,8 @@ import styles from "./HeartButton.module.css";
 import cn from "classnames";
 import Image from "next/image";
 
-import HeartIcon from "../../../public/heart.svg";
-import CheckIcon from "../../../public/check.svg";
+import HeartIcon from "../../../../public/heart.svg";
+import CheckIcon from "../../../../public/check.svg";
 
 export function HeartButton({ activated, className, ...props }: HeartButtonProps): JSX.Element {
     const [isActivated, setIsActivated] = useState(activated);

@@ -2,7 +2,7 @@
 import { useState, useEffect, FormEvent } from "react";
 import { SupportChatProps } from "./SupportChat.props";
 import styles from "./SupportChat.module.css";
-import { Button } from "@/components/Button/Button";
+import { Button } from "@/components/Buttons/Button/Button";
 import { SubText } from "@/components/SubText/SubText";
 import { TextArea } from "@/components/TextArea/TextArea";
 import { IMessage } from "@repo/interfaces";
@@ -11,6 +11,7 @@ import Image from 'next/image'
 import cn from "classnames";
 
 import { io } from "socket.io-client";
+import { Card } from "@/components/Card/Card";
 
 export const socket = io("http://localhost:3002");
 
@@ -101,52 +102,54 @@ export function SupportChat({ className, ...props }: SupportChatProps): JSX.Elem
 
     return (
         <div className={ cn(className, styles['chat-button']) }>
-            { chatActive && <div className={ styles['modal-chat'] }>
-                <div className={ styles['header-chat'] }>
-                    <Text size="2">Status: { isConnected ? "connected" : "loading" }</Text>
-                    <Text size="2">AppleRetail</Text>
+            { chatActive &&
+                <Card className={ styles['modal-chat'] }>
+
+                    <div className={ styles['header-chat'] }>
+                        <Text size="2">Status: { isConnected ? "connected" : "loading" }</Text>
+                        <Text size="2">AppleRetail</Text>
 
 
-                </div>
-                { isConnected ? (
-                    <div className={ styles['body-chat'] }>
-                        { chatHistory.map((message, idx) => (
-                            <div key={ idx } className={ styles['message-chat'] }>
-                                <Image src="" alt="" className={ styles['message-avatar'] } />
-                                <div className={ styles['message'] }>
-                                    { message.message_text }
-                                </div>
-                            </div>
-                        )) }
-                        <SubText size="1" className={ styles["warning"] }>
-                            Никому не сообщайте свои персональные данные
-                        </SubText>
                     </div>
-                ) : (
-                    <div className={ styles['loading'] }>Loading...</div>
-                ) }
-                { isConnected && (
-                    <form onSubmit={ onSubmit } className={ styles['actions-chat'] }>
-                        <Button icon={ "/Paperclip.svg" } size={ "large" } design={ "gray" }></Button>
-                        <TextArea
-                            onKeyDown={ handleKeyDown }
-                            onChange={ e => setValue(e.target.value) }
-                            value={ value }
-                            placeholder="Write something.."
-                            className={ styles['textarea'] }
+                    { isConnected ? (
+                        <div className={ styles['body-chat'] }>
+                            { chatHistory.map((message, idx) => (
+                                <div key={ idx } className={ styles['message-chat'] }>
+                                    <Image src="" alt="" className={ styles['message-avatar'] } />
+                                    <div className={ styles['message'] }>
+                                        { message.message_text }
+                                    </div>
+                                </div>
+                            )) }
+                            <SubText size="1" className={ styles["warning"] }>
+                                Никому не сообщайте свои персональные данные
+                            </SubText>
+                        </div>
+                    ) : (
+                        <div className={ styles['loading'] }>Loading...</div>
+                    ) }
+                    { isConnected && (
+                        <form onSubmit={ onSubmit } className={ styles['actions-chat'] }>
+                            <Button icon={ "/Paperclip.svg" } size={ "large" } design={ "gray" }></Button>
+                            <TextArea
+                                onKeyDown={ handleKeyDown }
+                                placeholder="Write something.."
+                                className={ styles['textarea'] }
 
-                        />
-                        <Button
-                            type="submit"
-                            disabled={ isLoading }
-                            icon={ "/PaperPlaneRight.svg" }
-                            size={ "large" }
-                            design={ "gray" }>
-                        </Button>
-                    </form>
-                )
-                }
-            </div >
+                            />
+                            <Button
+                                type="submit"
+                                disabled={ isLoading }
+                                icon={ "/PaperPlaneRight.svg" }
+                                size={ "large" }
+                                design={ "gray" }>
+                            </Button>
+                        </form>
+                    )
+                    }
+
+                </Card>
+
             }
             <button onClick={ openChat } className={ styles["sup-but"] }><Image className={ styles['chat'] } src={ "/chat.svg" } width={ 25 } height={ 25 } alt={ "chat" } /></button>
         </div>
