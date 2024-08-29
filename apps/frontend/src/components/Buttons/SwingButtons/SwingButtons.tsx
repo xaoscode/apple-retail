@@ -5,18 +5,20 @@ import cn from "classnames";
 
 import { Button } from '../Button/Button';
 
-export function SwingButtons({ ...props }: SwingButtonsProps): JSX.Element {
-    const [count, setCount] = useState<number>(0)
+export function SwingButtons({ count, onRemove, ...props }: SwingButtonsProps): JSX.Element {
+    const [coun, setCount] = useState<number>(count)
 
     const change = (num: number) => {
-        if (count + num >= 0) {
-            setCount(count + num);
+        if (coun + num >= 0) {
+            setCount(coun + num);
+        } else {
+            onRemove()
         }
     };
     return (
         <div className={ styles['swing-wrap'] } { ...props }>
             <Button onClick={ () => change(-1) } size={ 'medium' } design={ 'borderless' } icon='/minus.svg'></Button>
-            <div>{ count }</div>
+            <div>{ coun }</div>
             <Button onClick={ () => change(1) } size={ 'medium' } design={ 'borderless' } icon='/plus.svg'></Button>
         </div>
     )

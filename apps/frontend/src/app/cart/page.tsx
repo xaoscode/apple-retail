@@ -12,7 +12,7 @@ import { StockStatus } from "@/components/StockStatus/StockStatus";
 
 const ar = [
     {
-        id: "asdfsfsdf",
+        id: "asdfgadsfgasdgsfsdf",
         category: "phone",
         name: "iPhone 14",
         ram: 6,
@@ -20,10 +20,11 @@ const ar = [
         img: "/iphone13pro.jpg",
         cost: 55000,
         discountPercentage: 0,
-        reviewNum: 1234
+        reviewNum: 1234,
+        quantity: 1
     },
     {
-        id: "asdffasdfasdfsfsdf",
+        id: "asdffasdfasdfsffasdfsdf",
         category: "phone",
         name: "iPhone 15",
         ram: 6,
@@ -31,10 +32,11 @@ const ar = [
         img: "/iphone14pro.jpg",
         cost: 55000,
         discountPercentage: 20,
-        reviewNum: 345
+        reviewNum: 345,
+        quantity: 1
     },
     {
-        id: "asdfsfsdf",
+        id: "asasdfdfsfsdf",
         category: "phone",
         name: "iPhone 14",
         ram: 6,
@@ -42,10 +44,11 @@ const ar = [
         img: "/iphone13pro.jpg",
         cost: 55000,
         discountPercentage: 0,
-        reviewNum: 1234
+        reviewNum: 1234,
+        quantity: 1
     },
     {
-        id: "asdffasdfasdfsfsdf",
+        id: "asdffasdfasdfsffdasfsdf",
         category: "phone",
         name: "iPhone 15",
         ram: 6,
@@ -53,10 +56,11 @@ const ar = [
         img: "/iphone14pro.jpg",
         cost: 55000,
         discountPercentage: 20,
-        reviewNum: 345
+        reviewNum: 345,
+        quantity: 1
     },
     {
-        id: "asdfsfsdf",
+        id: "asdfdfsfsdf",
         category: "phone",
         name: "iPhone 14",
         ram: 6,
@@ -64,10 +68,11 @@ const ar = [
         img: "/iphone13pro.jpg",
         cost: 55000,
         discountPercentage: 0,
-        reviewNum: 1234
+        reviewNum: 1234,
+        quantity: 1
     },
     {
-        id: "asdffasdfasdfsfsdf",
+        id: "asdffasdfasdadfhgafsfsdf",
         category: "phone",
         name: "iPhone 15",
         ram: 6,
@@ -75,10 +80,11 @@ const ar = [
         img: "/iphone14pro.jpg",
         cost: 55000,
         discountPercentage: 20,
-        reviewNum: 345
+        reviewNum: 345,
+        quantity: 1
     },
     {
-        id: "asdfsfsdf",
+        id: "asdfsgafsdf",
         category: "phone",
         name: "iPhone 14",
         ram: 6,
@@ -86,10 +92,11 @@ const ar = [
         img: "/iphone13pro.jpg",
         cost: 55000,
         discountPercentage: 0,
-        reviewNum: 1234
+        reviewNum: 1234,
+        quantity: 1
     },
     {
-        id: "asdffasdfasdfsfsdf",
+        id: "asdffasdfasdgsafsfsdf",
         category: "phone",
         name: "iPhone 15",
         ram: 6,
@@ -97,10 +104,11 @@ const ar = [
         img: "/iphone14pro.jpg",
         cost: 55000,
         discountPercentage: 20,
-        reviewNum: 345
+        reviewNum: 345,
+        quantity: 1
     },
     {
-        id: "asdfsfsdf",
+        id: "asdfsfsdasgdf",
         category: "phone",
         name: "iPhone 14",
         ram: 6,
@@ -108,10 +116,11 @@ const ar = [
         img: "/iphone13pro.jpg",
         cost: 55000,
         discountPercentage: 0,
-        reviewNum: 1234
+        reviewNum: 1234,
+        quantity: 1
     },
     {
-        id: "asdffasdfasdfsfsdf",
+        id: "asdffasdfasdfsfdasfsdf",
         category: "phone",
         name: "iPhone 15",
         ram: 6,
@@ -119,16 +128,31 @@ const ar = [
         img: "/iphone14pro.jpg",
         cost: 55000,
         discountPercentage: 20,
-        reviewNum: 345
+        reviewNum: 345,
+        quantity: 1
     },
 ]
 
 
 
 export default function Cart() {
+    interface ICartItem extends IProduct {
+        quantity: number
+    }
 
-    const [products, setProducts] = useState<IProduct[]>(ar)
-
+    const [products, setProducts] = useState<ICartItem[]>(ar)
+    const removeProduct = (productId: string) => {
+        setProducts(products.filter(product => product.id !== productId))
+    }
+    const addProduct = (productId: string) => {
+        setProducts(prevProducts =>
+            prevProducts.map(product =>
+                product.id === productId
+                    ? { ...product, quantity: product.quantity + 1 }
+                    : product
+            )
+        );
+    }
     return (
 
         <div className={ styles['cart-wrap'] }>
@@ -137,14 +161,14 @@ export default function Cart() {
                 <div className={ styles['sub-header'] }>{ products.length } товаров</div>
             </div>
             { products &&
-                products.map((product: IProduct) => (
+                products.map((product: ICartItem) => (
                     <Card key={ product.id } className={ styles['product-wrap'] }>
                         <Link href={ "/cart" }>
                             <Image src={ product.img } alt={ "product-img" } width={ 120 } height={ 120 }></Image>
                         </Link>
                         <div className={ styles['product-action'] }>
                             <LinkText>{ product.name }</LinkText>
-                            <SwingButtons></SwingButtons>
+                            <SwingButtons count={ product.quantity } onRemove={ () => removeProduct(product.id) }></SwingButtons>
                             <StockStatus status="available-for-order"></StockStatus>
                         </div>
                     </Card>
