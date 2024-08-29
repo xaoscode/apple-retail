@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module';
 import { AuthCacheService } from './auth-caсhe.service';
 import { UpRedisModule } from '../core/redis/redis.module';
+import { JwtRefreshTokenStrategy } from './jwtRefreshToken.strategy';
 
 @Module({
   imports: [
@@ -26,7 +27,7 @@ import { UpRedisModule } from '../core/redis/redis.module';
       }),
     }),
   ],
-  providers: [AuthService, LocalStrategy, AuthCacheService],
+  providers: [AuthService, LocalStrategy, AuthCacheService, JwtRefreshTokenStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

@@ -13,7 +13,7 @@ import cn from "classnames";
 import { io } from "socket.io-client";
 import { Card } from "@/components/Card/Card";
 
-export const socket = io("http://localhost:3002");
+// export const socket = io("http://localhost:3002");
 
 
 

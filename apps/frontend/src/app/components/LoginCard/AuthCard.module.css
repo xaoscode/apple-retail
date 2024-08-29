@@ -1,24 +1,24 @@
 .card {
-	border-radius: 32px;
-	box-shadow: 0 10px 20px rgb(177 175 175 / 40%);
-	padding: 20px;
 	position: fixed;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 1000;
-	height: 700px;
+	height: 600px;
 	width: 680px;
 	background-color: var(--white-100);
 }
+
 .menu {
+	text-align: center;
 	margin: 100px;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	display: flex;
-	gap: 10px;
+	gap: 15px;
 }
+
 .form {
 	display: flex;
 	flex-direction: column;
@@ -30,6 +30,29 @@
 .close {
 	float: right;
 }
+
 .extra {
 	margin-top: 20px;
+}
+
+.password-wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.button-eye {
+	position: absolute;
+	right: 10px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 1px;
+	margin: 0;
+	line-height: 0;
+	&:hover {
+		border-radius: 50%;
+		border: 1px solid var(--blue-10);
+	}
 }

@@ -12,6 +12,7 @@ import { CartButton } from "@/components/Buttons/CartButton/CartButton";
 import { PricePanel } from "@/components/PricePanel/PricePanel";
 import Link from "next/link";
 import TrashIcon from "../../public/trash.svg"
+import { Cookie } from "next/font/google";
 
 const ar = [
   {
@@ -133,7 +134,6 @@ export default function Home() {
   const calcDiscount = (cost: number, percentage: number): number => {
     return cost - (cost * percentage / 100)
   }
-
   return (
     <main className={ styles.main }>
       <Carousel background={ false } products={ ar } visable={ true } renderProduct={ function (product: IProduct, index: number): JSX.Element {

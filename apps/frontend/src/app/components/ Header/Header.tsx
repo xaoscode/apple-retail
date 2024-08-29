@@ -1,3 +1,4 @@
+"use client"
 import { HeaderProps } from "../ Header/Header.props";
 import styles from "./Header.module.css";
 import cn from "classnames";
@@ -5,7 +6,7 @@ import Image from 'next/image'
 import { SearchInput } from "@/components/SearchInput/SearchInput";
 import { AuthCard } from "../LoginCard/AuthCard";
 import Link from "next/link";
-import { Button } from "@/components/Buttons/Button/Button";
+import { refreshAccessToken } from "@/app/api/login";
 
 export const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
     return (
@@ -21,7 +22,8 @@ export const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
                     </button>
                 </Link>
                 <AuthCard />
-                <Button size={ "medium" } design={ "filled" }>Вход</Button>
+                <button onClick={ refreshAccessToken }>fasf</button>
+                <Link href={ "/profile" }>profile</Link>
             </div>
         </div>
     );

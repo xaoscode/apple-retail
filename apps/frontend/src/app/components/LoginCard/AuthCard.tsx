@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { AuthCardProps } from "./AuthCard.props";
 import styles from "./AuthCard.module.css";
 import { useReducer, useState } from "react";
@@ -8,8 +8,10 @@ import { Text } from "@/components/Text/Text";
 import { Card } from "@/components/Card/Card";
 import { formReducer, INITIAL_STATE } from "./auth.reducer";
 import { login } from "@/app/api/login";
+import Image from "next/image";
 
 export function AuthCard({ ...props }: AuthCardProps): JSX.Element {
+    const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false)
     const [activeCard, setActiveCard] = useState(false);
     const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
     const { errors, isFormValid } = formState
@@ -27,13 +29,14 @@ export function AuthCard({ ...props }: AuthCardProps): JSX.Element {
         dispatchForm({ type: "VALIDATE_FORM" });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (isFormValid) {
-
+            const res = await login(formState.email, formState.password)
+            console.log(res)
             // Здесь можно выполнить логику отправки данных на сервер
-            dispatchForm({ type: "CLEAR" });
-            setActiveCard(false);
+            // dispatchForm({ type: "CLEAR" });
+            // setActiveCard(false);
         }
     };
 
@@ -49,8 +52,8 @@ export function AuthCard({ ...props }: AuthCardProps): JSX.Element {
                         icon="/close.svg"
                     />
                     <div className={ styles.menu } { ...props }>
+                        <Text size="1">Вход</Text>
                         <form className={ styles.form } onSubmit={ handleSubmit }>
-                            <Text size="1">Вход</Text>
                             <Input
                                 placeholder="Email"
                                 name="email"
@@ -58,14 +61,22 @@ export function AuthCard({ ...props }: AuthCardProps): JSX.Element {
                                 onChange={ handleInputChange }
                                 error={ errors.email }
                             />
-                            <Input
-                                placeholder="Пароль"
-                                name="password"
-                                type="password"
-                                value={ formState.password }
-                                onChange={ handleInputChange }
-                                error={ errors.password }
-                            />
+                            <div className={ styles['password-wrap'] }>
+                                <Input
+                                    placeholder="Пароль"
+                                    name="password"
+                                    type={ isPasswordVisible ? 'text' : 'password' }
+                                    value={ formState.password }
+                                    onChange={ handleInputChange }
+                                    error={ errors.password }
+                                />
+                                <button className={ styles['button-eye'] } onClick={ () => setIsPasswordVisible(!isPasswordVisible) }>
+                                    { !errors.password && (isPasswordVisible ?
+                                        <Image src={ "/open-eye.svg" } alt={ "close-eye" } width={ 24 } height={ 24 }></Image> :
+                                        <Image src={ "/close-eye.svg" } alt={ "close-eye" } width={ 24 } height={ 24 }></Image>) }
+                                </button>
+                            </div>
+
                             <Button
                                 design="filled"
                                 size="large"
@@ -80,9 +91,10 @@ export function AuthCard({ ...props }: AuthCardProps): JSX.Element {
                             <Button size="small" design="borderless">Забыли пароль?</Button>
                             <Button size="small" design="borderless">Связаться с нами</Button>
                         </div>
-                    </div>
-                </Card>
-            ) }
+                    </div >
+                </Card >
+            )
+            }
             <Button
                 className={ styles.button }
                 onClick={ openCard }
