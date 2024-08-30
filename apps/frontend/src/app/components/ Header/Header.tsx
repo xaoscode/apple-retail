@@ -9,6 +9,19 @@ import Link from "next/link";
 import { refreshAccessToken } from "@/app/api/login";
 
 export const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
+    const logout = async () => {
+        const res = await fetch("http://localhost:3000/api/auth/log-out", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: 'include'
+        })
+        if (res.ok) {
+            console.log('ok')
+        }
+
+    }
     return (
         <div { ...props } className={ cn(className, styles['header']) } >
             <Link href={ "/" }>
@@ -22,8 +35,8 @@ export const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
                     </button>
                 </Link>
                 <AuthCard />
-                <button onClick={ refreshAccessToken }>fasf</button>
                 <Link href={ "/profile" }>profile</Link>
+                <button onClick={ logout }>LogOut</button>
             </div>
         </div>
     );
