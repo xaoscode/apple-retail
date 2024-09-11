@@ -153,12 +153,16 @@ export default function Cart() {
             )
         );
     }
-    return (
 
+    const sum = 0;
+    const sumWithInitial = products.reduce((acc, product: ICartItem) => acc + product.quantity, sum);
+
+
+    return (
         <div className={ styles['cart-wrap'] }>
             <div className={ styles['header-wrap'] }>
                 <div className={ styles['header'] }>Корзина</div>
-                <div className={ styles['sub-header'] }>{ products.length } товаров</div>
+                <div className={ styles['sub-header'] }> { sumWithInitial } товаров</div>
             </div>
             { products &&
                 products.map((product: ICartItem) => (
@@ -168,7 +172,7 @@ export default function Cart() {
                         </Link>
                         <div className={ styles['product-action'] }>
                             <LinkText>{ product.name }</LinkText>
-                            <SwingButtons count={ product.quantity } onRemove={ () => removeProduct(product.id) }></SwingButtons>
+                            <SwingButtons onAdd={ () => { addProduct } } count={ product.quantity } onRemove={ () => removeProduct(product.id) }></SwingButtons>
                             <StockStatus status="available-for-order"></StockStatus>
                         </div>
                     </Card>

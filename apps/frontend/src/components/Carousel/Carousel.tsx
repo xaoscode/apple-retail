@@ -1,3 +1,4 @@
+'use client'
 import { CarouselProps } from "./Carousel.props";
 import styles from "./Carousel.module.css";
 import Image from "next/image";
