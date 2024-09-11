@@ -5,7 +5,7 @@ import cn from "classnames";
 
 import { Button } from '../Button/Button';
 
-export function SwingButtons({ count, onRemove, ...props }: SwingButtonsProps): JSX.Element {
+export function SwingButtons({ count, onRemove, onAdd, ...props }: SwingButtonsProps): JSX.Element {
     const [coun, setCount] = useState<number>(count)
 
     const change = (num: number) => {

@@ -11,7 +11,9 @@
 	"dependencies": {
 		"@repo/interfaces": "workspace:*",
 		"classnames": "^2.5.1",
+		"jwt-decode": "^4.0.0",
 		"next": "14.2.5",
+		"next-auth": "5.0.0-beta.20",
 		"react": "^18",
 		"react-dom": "^18",
 		"socket.io-client": "^4.7.5"

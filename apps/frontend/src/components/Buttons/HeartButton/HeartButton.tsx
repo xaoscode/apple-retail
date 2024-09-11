@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import { HeartButtonProps } from "./HeartButton.props";
 import styles from "./HeartButton.module.css";

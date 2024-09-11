@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import { CartButtonProps } from "./CartButton.props";
 import styles from "./CartButton.module.css";

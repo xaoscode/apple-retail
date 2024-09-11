@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import Image from "next/image";
 import styles from "./page.module.css";
 import { Button } from "@/components/Buttons/Button/Button";
@@ -7,12 +7,10 @@ import { Carousel } from "../components/Carousel/Carousel";
 import { Rating } from "@/components/Rating/Rating";
 import { IProduct } from "@repo/interfaces";
 import { HeartButton } from "@/components/Buttons/HeartButton/HeartButton";
-import { useState } from "react";
 import { CartButton } from "@/components/Buttons/CartButton/CartButton";
 import { PricePanel } from "@/components/PricePanel/PricePanel";
 import Link from "next/link";
 import TrashIcon from "../../public/trash.svg"
-import { Cookie } from "next/font/google";
 
 const ar = [
   {
@@ -24,7 +22,8 @@ const ar = [
     img: "/iphone13pro.jpg",
     cost: 55000,
     discountPercentage: 0,
-    reviewNum: 1234
+    reviewNum: 1234,
+    rating: 4
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -35,7 +34,8 @@ const ar = [
     img: "/iphone14pro.jpg",
     cost: 55000,
     discountPercentage: 20,
-    reviewNum: 345
+    reviewNum: 345,
+    rating: 4
   },
   {
     id: "asdfsfsdf",
@@ -46,7 +46,8 @@ const ar = [
     img: "/iphone13pro.jpg",
     cost: 55000,
     discountPercentage: 0,
-    reviewNum: 1234
+    reviewNum: 1234,
+    rating: 4
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -57,7 +58,8 @@ const ar = [
     img: "/iphone14pro.jpg",
     cost: 55000,
     discountPercentage: 20,
-    reviewNum: 345
+    reviewNum: 345,
+    rating: 4
   },
   {
     id: "asdfsfsdf",
@@ -68,7 +70,8 @@ const ar = [
     img: "/iphone13pro.jpg",
     cost: 55000,
     discountPercentage: 0,
-    reviewNum: 1234
+    reviewNum: 1234,
+    rating: 4
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -79,7 +82,8 @@ const ar = [
     img: "/iphone14pro.jpg",
     cost: 55000,
     discountPercentage: 20,
-    reviewNum: 345
+    reviewNum: 345,
+    rating: 4
   },
   {
     id: "asdfsfsdf",
@@ -90,7 +94,8 @@ const ar = [
     img: "/iphone13pro.jpg",
     cost: 55000,
     discountPercentage: 0,
-    reviewNum: 1234
+    reviewNum: 1234,
+    rating: 4
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -101,7 +106,8 @@ const ar = [
     img: "/iphone14pro.jpg",
     cost: 55000,
     discountPercentage: 20,
-    reviewNum: 345
+    reviewNum: 345,
+    rating: 4
   },
   {
     id: "asdfsfsdf",
@@ -112,7 +118,8 @@ const ar = [
     img: "/iphone13pro.jpg",
     cost: 55000,
     discountPercentage: 0,
-    reviewNum: 1234
+    reviewNum: 1234,
+    rating: 4
   },
   {
     id: "asdffasdfasdfsfsdf",
@@ -123,13 +130,13 @@ const ar = [
     img: "/iphone14pro.jpg",
     cost: 55000,
     discountPercentage: 20,
-    reviewNum: 345
+    reviewNum: 345,
+    rating: 4
   },
 ]
 
 
 export default function Home() {
-  const [rating, setRating] = useState<number>(4)
 
   const calcDiscount = (cost: number, percentage: number): number => {
     return cost - (cost * percentage / 100)
@@ -179,7 +186,7 @@ export default function Home() {
             </div>
             <p className={ styles.text }>Смартфон iPhone 14, 256Гб, [32гб]  </p>
             <Link className={ styles.link } href={ "/cart" }>
-              <Rating reviewNum={ product.reviewNum } rating={ rating } isEditable={ false } setRating={ setRating } />
+              <Rating reviewNum={ product.reviewNum } rating={ product.rating } isEditable={ false } />
             </Link>
             <div className={ styles['actions'] }>
               <PricePanel cost={ product.cost } discountPercentage={ product.discountPercentage }></PricePanel>

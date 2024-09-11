@@ -8,6 +8,7 @@ import { Header } from "./components/ Header/Header";
 import { SmallHeader } from "./components/SmallHeader/SmallHeader";
 import Image from 'next/image'
 import { SupportChat } from "./components/SupportChat/SupportChat";
+import { SessionProvider } from "next-auth/react";
 
 const DMSans = Inter({
   subsets: ['latin'],
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body className={ DMSans.className }>
         <div className={ styles.wrapper }>
           <SmallHeader className={ styles["small-header"] } />
-          <Header className={ styles.header } />
+          <SessionProvider>
+            <Header className={ styles.header } />
+          </SessionProvider>
           <div className={ styles.body }>
             { children }
           </div>

@@ -1,6 +1,8 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
+import NextAuth from "next-auth";
+import authConfig from "./auth.config";
 
+<<<<<<< HEAD
 export async function middleware(req: NextRequest) {
 	const accessToken = req.cookies?.get("Authentication");
 	const refreshToken = req.cookies?.get("Refresh");
@@ -37,6 +39,17 @@ export async function middleware(req: NextRequest) {
 	return NextResponse.next();
 }
 
+=======
+// Use only one of the two middleware options below
+// 1. Use middleware directly
+// export const { auth: middleware } = NextAuth(authConfig)
+
+// 2. Wrapped middleware option
+const { auth } = NextAuth(authConfig);
+export default auth(async function middleware(req: NextRequest) {
+	// Your custom middleware logic goes here
+});
+>>>>>>> next-15-update
 export const config = {
-	matcher: "/profile/:path*",
+	matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

@@ -1,4 +1,3 @@
-"use client"
 import styles from "./page.module.css";
 import { Card } from "@/components/Card/Card";
 import { useEffect, useState } from "react";
@@ -9,6 +8,8 @@ import { LinkText } from "@/components/LinkText/LinkText";
 import Link from "next/link";
 import { SwingButtons } from "@/components/Buttons/SwingButtons/SwingButtons";
 import { StockStatus } from "@/components/StockStatus/StockStatus";
+import { AuthCard } from "../components/ Header/components/LoginCard/AuthCard";
+import { SignIn } from "./components/sign-in";
 
 
 
@@ -16,11 +17,12 @@ import { StockStatus } from "@/components/StockStatus/StockStatus";
 
 export default function Profile() {
 
-    useEffect(() => { }, [])
     return (
 
-        <div>
-        </div>
+        <>
+            <SignIn></SignIn >
+        </>
+
 
     );
 }
