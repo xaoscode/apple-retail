@@ -9,7 +9,7 @@ export function SwingButtons({ count, onRemove, ...props }: SwingButtonsProps): 
     const [coun, setCount] = useState<number>(count)
 
     const change = (num: number) => {
-        if (coun + num >= 0) {
+        if (coun + num > 0) {
             setCount(coun + num);
         } else {
             onRemove()

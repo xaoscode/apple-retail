@@ -3,13 +3,12 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
 	const accessToken = req.cookies?.get("Authentication");
-	const refreshToken = req.cookies.get("Refresh");
-	console.log(refreshToken);
+	const refreshToken = req.cookies?.get("Refresh");
 	// Если нет access токена, проверяем наличие refresh токена
 	if (!accessToken) {
-		if (refreshToken) {
-			const cookieHeader = `Refresh=${refreshToken.value}`;
+		console.log(1);
 
+		if (refreshToken) {
 			const response = await fetch("http://localhost:3000/api/auth/refresh", {
 				method: "GET",
 				headers: {
@@ -18,24 +17,26 @@ export async function middleware(req: NextRequest) {
 				},
 			});
 
-			console.log(response.status);
 			if (response.ok) {
-				console.log("ура ");
+				const setCookieHeader = response.headers.get("set-cookie");
+
+				if (setCookieHeader) {
+					const nextResponse = NextResponse.next();
+					nextResponse.headers.set("Set-Cookie", setCookieHeader);
+
+					return nextResponse;
+				}
 			} else {
-				// Если обновление не удалось, перенаправляем на страницу входа
 				return NextResponse.redirect(new URL("/", req.url));
 			}
 		} else {
-			// Если нет ни access, ни refresh токена, перенаправляем на страницу входа
 			return NextResponse.redirect(new URL("/", req.url));
 		}
 	}
 
-	// Если access токен есть, продолжаем выполнение запроса
 	return NextResponse.next();
 }
 
-// Применение middleware к нужным роутам
 export const config = {
 	matcher: "/profile/:path*",
 };

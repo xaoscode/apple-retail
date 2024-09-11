@@ -9,6 +9,7 @@ import { UserModule } from '../user/user.module';
 import { AuthCacheService } from './auth-caсhe.service';
 import { UpRedisModule } from '../core/redis/redis.module';
 import { JwtRefreshTokenStrategy } from './jwtRefreshToken.strategy';
+import { JwtStrategy } from './ jwt.strategy';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { JwtRefreshTokenStrategy } from './jwtRefreshToken.strategy';
       }),
     }),
   ],
-  providers: [AuthService, LocalStrategy, AuthCacheService, JwtRefreshTokenStrategy],
+  providers: [AuthService, LocalStrategy, AuthCacheService, JwtRefreshTokenStrategy, JwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}
