@@ -20,7 +20,7 @@ export function AuthForm({ activeReg }: AuthFormProps): JSX.Element {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const { update, data, status } = useSession()
 
-    useEffect(() => { update() }, [formAction])
+    useEffect(() => { }, [formAction])
     return (
         <form className={ styles.form } action={ formAction }>
             <Input
