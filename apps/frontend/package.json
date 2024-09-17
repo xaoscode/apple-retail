@@ -10,21 +10,23 @@
 	},
 	"dependencies": {
 		"@repo/interfaces": "workspace:*",
+		"add": "^2.0.6",
 		"classnames": "^2.5.1",
 		"jwt-decode": "^4.0.0",
-		"next": "14.2.5",
+		"next": "15.0.0-rc.0",
 		"next-auth": "5.0.0-beta.20",
-		"react": "^18",
-		"react-dom": "^18",
-		"socket.io-client": "^4.7.5"
+		"react": "19.0.0-rc-3dfd5d9e-20240910",
+		"react-dom": "19.0.0-rc-3dfd5d9e-20240910",
+		"socket.io-client": "^4.7.5",
+		"zod": "^3.23.8"
 	},
 	"devDependencies": {
 		"@svgr/webpack": "^8.1.0",
 		"@types/node": "^20",
-		"@types/react": "^18",
-		"@types/react-dom": "^18",
+		"@types/react": "^18.3.5",
+		"@types/react-dom": "^18.3.0",
 		"eslint": "^8",
-		"eslint-config-next": "14.2.5",
+		"eslint-config-next": "15.0.0-rc.0",
 		"typescript": "^5"
 	}
 }

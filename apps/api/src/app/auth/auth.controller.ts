@@ -17,8 +17,29 @@ export class AuthController {
   ) {}
 
   @Post('register')
-  register(@Body() dto: RegisterDto) {
-    return this.authService.register(dto);
+  async register(@Body() dto: RegisterDto) {
+    console.log('register');
+    const user = await this.authService.register(dto);
+
+    const { accessToken, accessExp } = await this.authService.getCookieWithJwtAccessToken(user.id);
+    const { refreshToken, refreshExp } = await this.authService.getCookieWithJwtRefreshToken(user.id);
+
+    await this.authCacheService.saveRefreshToRedis(user.id, refreshToken);
+    const currentTime = new Date();
+    return {
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.nickname,
+      },
+
+      backendTokens: {
+        accessToken,
+        accessExp: new Date(currentTime.getTime() + accessExp * 1000).getTime(),
+        refreshToken,
+        refreshExp: new Date(currentTime.getTime() + refreshExp * 1000).getTime(),
+      },
+    };
   }
 
   @HttpCode(200)
@@ -28,10 +49,11 @@ export class AuthController {
   async logIn(@Req() request: RequestWithUser) {
     console.log('login');
     const { user } = request;
-    const { accessToken, accessExp } = this.authService.getCookieWithJwtAccessToken(user.id);
+    const { accessToken, accessExp } = await this.authService.getCookieWithJwtAccessToken(user.id);
     const { refreshToken, refreshExp } = await this.authService.getCookieWithJwtRefreshToken(user.id);
 
     await this.authCacheService.saveRefreshToRedis(user.id, refreshToken);
+    const currentTime = new Date();
 
     return {
       user: {
@@ -42,8 +64,9 @@ export class AuthController {
 
       backendTokens: {
         accessToken,
+        accessExp: new Date(currentTime.getTime() + accessExp * 1000).getTime(),
         refreshToken,
-        expiresIn: new Date().setTime(Number(new Date().getTime() + accessExp * 60)),
+        refreshExp: new Date(currentTime.getTime() + refreshExp * 1000).getTime(),
       },
     };
   }
@@ -63,11 +86,17 @@ export class AuthController {
     console.log('refresh');
     const { user } = request;
 
-    const { accessToken, accessExp } = this.authService.getCookieWithJwtAccessToken(user.id);
+    const { accessToken, accessExp } = await this.authService.getCookieWithJwtAccessToken(user.id);
     const { refreshToken, refreshExp } = await this.authService.getCookieWithJwtRefreshToken(user.id);
 
     await this.authCacheService.saveRefreshToRedis(user.id, refreshToken);
-    return { accessToken, refreshToken, expiresIn: new Date().setTime(Number(new Date().getTime() + accessExp * 600)) };
+    const currentTime = new Date();
+    return {
+      accessToken,
+      accessExp: new Date(currentTime.getTime() + accessExp * 1000).getTime(),
+      refreshToken,
+      refreshExp: new Date(currentTime.getTime() + refreshExp * 1000).getTime(),
+    };
   }
 
   @UseGuards(JwtAuthenticationGuard)

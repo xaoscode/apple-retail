@@ -8,7 +8,6 @@ import { LinkText } from "@/components/LinkText/LinkText";
 import Link from "next/link";
 import { SwingButtons } from "@/components/Buttons/SwingButtons/SwingButtons";
 import { StockStatus } from "@/components/StockStatus/StockStatus";
-import { AuthCard } from "../components/ Header/components/LoginCard/AuthCard";
 import { SignIn } from "./components/sign-in";
 
 
@@ -20,7 +19,7 @@ export default function Profile() {
     return (
 
         <>
-            <SignIn></SignIn >
+
         </>
 
 

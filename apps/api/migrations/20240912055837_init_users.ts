@@ -5,10 +5,10 @@ export async function up(knex: Knex): Promise<void> {
   await knex.raw(`
     CREATE TABLE users (
       id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
-      email VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL UNIQUE,
       password_hash VARCHAR(255) NOT NULL,
-      phone_number VARCHAR(30),
-      nickname VARCHAR(50),
+      phone_number VARCHAR(30) UNIQUE,
+      nickname VARCHAR(50) UNIQUE,
       first_name VARCHAR(255),
       last_name VARCHAR(255),
       birthdate DATE,

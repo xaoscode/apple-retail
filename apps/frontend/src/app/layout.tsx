@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className={ DMSans.className }>
         <div className={ styles.wrapper }>
           <SmallHeader className={ styles["small-header"] } />
-          <SessionProvider>
+          <SessionProvider >
             <Header className={ styles.header } />
           </SessionProvider>
           <div className={ styles.body }>

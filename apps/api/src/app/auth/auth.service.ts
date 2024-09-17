@@ -45,14 +45,15 @@ export class AuthService {
 
   private async verifyPassword(plainTextPassword: string, hashedPassword: string) {
     const isPasswordMatching = await compare(plainTextPassword, hashedPassword);
+    console.log(isPasswordMatching);
     if (!isPasswordMatching) {
       throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
     }
   }
 
-  public getCookieWithJwtAccessToken(userId: string) {
+  public async getCookieWithJwtAccessToken(userId: string) {
     const payload: TokenPayload = { userId };
-    const accessToken = this.jwtService.sign(payload, {
+    const accessToken = await this.jwtService.signAsync(payload, {
       secret: this.configService.get('JWT_ACCESS_TOKEN_SECRET'),
       expiresIn: `${this.configService.get('JWT_REFRESH_TOKEN_EXPIRATION_TIME')}s`,
     });

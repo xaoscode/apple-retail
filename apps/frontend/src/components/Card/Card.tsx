@@ -6,7 +6,7 @@ import cn from "classnames"
 export const Card = ({ className, children, ...props }: CardProps) => {
 
     return (
-        <div className={ cn(className, style['card']) }>
+        <div { ...props } className={ cn(className, style['card']) }>
             { children }
         </div>
     )

@@ -11,9 +11,7 @@ export const Input = forwardRef(({ className, error, ...props }: InputProps, ref
 
             <div className={ styles["input-wrapper"] }>
                 <input ref={ ref } className={ cn(styles['input'], { [styles['error']]: error }) } { ...props } />
-                { error &&
-                    <Image className={ styles["error-icon"] } src={ "/error.svg" } alt={ "error" } height={ 24 } width={ 24 } />
-                }
+
             </div>
             <div className={ styles['text-error'] }>{ error }</div>
 

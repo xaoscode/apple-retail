@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+import { JWT } from "next-auth/jwt";
 
 declare module "next-auth" {
 	interface Session {
@@ -11,12 +12,11 @@ declare module "next-auth" {
 		backendTokens: {
 			accessToken: string;
 			refreshToken: string;
-			expiresIn: number;
+			accessExp: number;
+			refreshExp: number;
 		};
 	}
 }
-
-import { JWT } from "next-auth/jwt";
 
 declare module "next-auth/jwt" {
 	interface JWT {
@@ -30,7 +30,8 @@ declare module "next-auth/jwt" {
 		backendTokens: {
 			accessToken: string;
 			refreshToken: string;
-			expiresIn: number;
+			accessExp: number;
+			refreshExp: number;
 		};
 	}
 }

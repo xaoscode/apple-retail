@@ -1,74 +1,79 @@
 "use client"
 import { ProfileProps } from "./Profile.props";
 import styles from "./Profile.module.css";
-import Image from "next/image";
 import { Card } from "@/components/Card/Card";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserIcon from '../../../../../../public/user.svg'
-import { auth } from "@/auth";
-import { AuthCard } from "../LoginCard/AuthCard";
-import { SessionProvider, useSession } from "next-auth/react";
 import { Button } from "@/components/Buttons/Button/Button";
 import { AppContext } from "@/app/context/app.context";
-import { signout } from "@/lib/func";
-import { Backend_URL } from "@/lib/Constants";
+import cn from 'classnames'
+import { SumbitButton } from "../AuthCard/components/SubmitButton/SumbitButton";
+import { logoutAction } from "@/app/components/ Header/components/AuthCard/_data/auth-actions";
+import { useSession } from "next-auth/react";
 
 export function Profile({ ...props }: ProfileProps): JSX.Element {
     const [isHovered, setIsHovered] = useState(false);
-    const { active, setActive } = useContext(AppContext)
-    const session = useSession()
-    function set() {
-        setActive && setActive(!active)
-    }
-    async function logOut() {
-        const res = await fetch(`${Backend_URL}/api/auth/log-out`, {
-            method: 'POST',
-            headers: {
-                authorization: `${session.data?.backendTokens.accessToken}`
-            }
-        })
-        if (res.status === 400) {
-            signout()
-        }
+    const { activeLogin, setActiveLogin, activeReg, setActiveReg } = useContext(AppContext)
+    const { update, data, status } = useSession()
+    function logout() {
+        logoutAction
+        update
 
     }
+
+
     return (
-
-        <div className={ styles['profile-wrap'] } onMouseEnter={ () => setIsHovered(true) } onMouseLeave={ () => setIsHovered(false) }>
-            <div className={ styles['icon-wrap '] }>
+        <div
+            className={ styles['profile-wrap'] }
+            onMouseEnter={ () => setIsHovered(true) }
+            onMouseLeave={ () => setIsHovered(false) }
+        >
+            <div className={ styles['icon-wrap'] }>
                 <UserIcon className={ styles['icon'] } />
+                <div className={ styles['icon-text'] }>Войти</div>
             </div>
             { isHovered &&
-                <Card className={ styles['card'] }>
+                <Card className={ cn(styles['card'], { [styles['show']]: isHovered }) }>
 
-                    {
-                        !session?.data?.backendTokens.accessToken ?
-                            <div className={ styles['notauthorized'] }>
-                                <Button
-                                    design="filled"
-                                    size="large"
-                                    type="submit"
-                                    onClick={ set }
-                                >
-                                    Войти
-                                </Button>
-                            </div> :
+                    { status === "authenticated" ?
+                        <form action={ logoutAction }>
+                            <SumbitButton text={ "Выход" }>авыа</SumbitButton>
+                        </form> :
+                        <div className={ styles['notauthorized'] }>
+                            <p className={ styles['text'] }>Добро пожаловать! </p>
+                            <Button
+                                design="filled"
+                                size="medium"
+                                type="button"
+                                onClick={ () => setActiveLogin && setActiveLogin(!activeLogin) }
+                            >
+                                Войти
+                            </Button>
+                            <span className={ styles['separator'] }>или</span>
+                            <Button
+                                design="outline"
+                                size="medium"
+                                type="button"
+                                onClick={ () => setActiveReg && setActiveReg(!activeReg) }
+                            >
+                                Регистрация
+                            </Button>
 
-                            <div className={ styles['authorized'] }>
-                                <form action={ logOut }>
-                                    <Button design="filled"
-                                        size="large"
-                                        type="submit">
-                                        Выйти
-                                    </Button>
-                                </form>
-
-                            </div>
+                        </div>
                     }
+
+
+
+                    <div className={ styles['authorized'] }>
+                        <div className={ styles['user-info'] }>
+                            <span>Здравствуйте, !</span>
+                        </div>
+
+                    </div>
+
                 </Card>
-
             }
-        </div>
 
+        </div>
     );
 };

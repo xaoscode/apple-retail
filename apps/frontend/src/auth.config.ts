@@ -1,17 +1,15 @@
-import GitHub from "next-auth/providers/github";
-import type { NextAuthConfig } from "next-auth";
+import { type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { Backend_URL } from "./lib/Constants";
-import { JWT } from "next-auth/jwt";
-import { signOut } from "next-auth/react";
-import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
-import { config } from "process";
+import { JWT, JWTOptions } from "next-auth/jwt";
+import { Backend_URL } from "./app/_lib/Constants";
+import { Adapter } from "next-auth/adapters";
 
 async function refreshToken(token: JWT): Promise<JWT | null> {
-	const res = await fetch(Backend_URL + "/api/auth/refresh", {
+	const url = new URL("/api/auth/refresh", Backend_URL);
+	const res = await fetch(url, {
 		method: "GET",
 		headers: {
-			authorization: `${token.backendTokens.refreshToken}`,
+			Authorization: `Bearer ${token.backendTokens.refreshToken}`,
 		},
 	});
 	console.log("refreshed");
@@ -57,11 +55,10 @@ export default {
 	callbacks: {
 		async jwt({ token, user }) {
 			if (user) return { ...token, ...user };
-			if (new Date().getTime() < token.backendTokens.expiresIn) return token;
+			if (new Date().getTime() < token.backendTokens.accessExp) return token;
 
 			return await refreshToken(token);
 		},
-
 		async session({ token, session }) {
 			session.user = token.user;
 			session.backendTokens = token.backendTokens;

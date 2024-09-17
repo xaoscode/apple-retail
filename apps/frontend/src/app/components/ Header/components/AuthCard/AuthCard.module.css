@@ -1,0 +1,41 @@
+.card {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1500;
+	height: 600px;
+	width: 680px;
+	background-color: var(--white-100);
+}
+
+.menu {
+	text-align: center;
+	margin: 100px;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	display: flex;
+	gap: 15px;
+}
+
+.close {
+	float: right;
+}
+
+.extra {
+	margin-top: 20px;
+}
+
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 1001;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
