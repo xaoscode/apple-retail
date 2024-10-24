@@ -5,7 +5,7 @@ import styles from "./layout.module.css";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/ Header/Header";
 import { SmallHeader } from "./components/SmallHeader/SmallHeader";
-import { SupportChat } from "./components/SupportChat/SupportChat";
+// import { SupportChat } from "./components/SupportChat/SupportChat";
 import AuthWrapper from "./AuthWrapper";
 
 const DMSans = Inter({
@@ -36,7 +36,7 @@ export default function RootLayout({
           </div>
           <Footer className={ styles.footer }></Footer>
         </div>
-        <SupportChat />
+        {/* <SupportChat /> */ }
       </body>
     </html>
   );

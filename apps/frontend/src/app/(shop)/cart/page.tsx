@@ -2,7 +2,7 @@
 import styles from "./page.module.css";
 import { Card } from "@/components/Card/Card";
 import { useState } from "react";
-import { IProduct } from "@repo/interfaces";
+import { Category, IProduct } from "@repo/interfaces/src/lib/product.interface";
 import Image from "next/image";
 import { LinkText } from "@/components/LinkText/LinkText";
 import Link from "next/link";
@@ -11,124 +11,69 @@ import { StockStatus } from "@/components/StockStatus/StockStatus";
 
 const ar = [
     {
-        id: "asdfgadsfgasdgsfsdf",
-        category: "phone",
-        name: "iPhone 14",
-        ram: 6,
-        memory: 256,
-        img: "/iphone13pro.jpg",
-        cost: 55000,
-        discountPercentage: 0,
-        reviewNum: 1234,
-        quantity: 1
-    },
-    {
-        id: "asdffasdfasdfsffasdfsdf",
-        category: "phone",
+        id: 1,
+        category: Category.iPhone,
         name: "iPhone 15",
         ram: 6,
         memory: 256,
-        img: "/iphone14pro.jpg",
-        cost: 55000,
-        discountPercentage: 20,
+        titleImg: "/iphone14pro.jpg",
+        price: 55000,
+        discount: 20,
         reviewNum: 345,
-        quantity: 1
+        rating: 4,
+        quantity: 45
     },
     {
-        id: "asasdfdfsfsdf",
-        category: "phone",
-        name: "iPhone 14",
-        ram: 6,
-        memory: 256,
-        img: "/iphone13pro.jpg",
-        cost: 55000,
-        discountPercentage: 0,
-        reviewNum: 1234,
-        quantity: 1
-    },
-    {
-        id: "asdffasdfasdfsffdasfsdf",
-        category: "phone",
+        id: 2,
+        category: Category.iPhone,
         name: "iPhone 15",
         ram: 6,
         memory: 256,
-        img: "/iphone14pro.jpg",
-        cost: 55000,
-        discountPercentage: 20,
+        titleImg: "/iphone14pro.jpg",
+        price: 55000,
+        discount: 20,
         reviewNum: 345,
-        quantity: 1
+        rating: 4,
+        quantity: 45
     },
     {
-        id: "asdfdfsfsdf",
-        category: "phone",
-        name: "iPhone 14",
-        ram: 6,
-        memory: 256,
-        img: "/iphone13pro.jpg",
-        cost: 55000,
-        discountPercentage: 0,
-        reviewNum: 1234,
-        quantity: 1
-    },
-    {
-        id: "asdffasdfasdadfhgafsfsdf",
-        category: "phone",
+        id: 3,
+        category: Category.iPhone,
         name: "iPhone 15",
         ram: 6,
         memory: 256,
-        img: "/iphone14pro.jpg",
-        cost: 55000,
-        discountPercentage: 20,
+        titleImg: "/iphone14pro.jpg",
+        price: 55000,
+        discount: 20,
         reviewNum: 345,
-        quantity: 1
+        rating: 4,
+        quantity: 45
     },
     {
-        id: "asdfsgafsdf",
-        category: "phone",
-        name: "iPhone 14",
-        ram: 6,
-        memory: 256,
-        img: "/iphone13pro.jpg",
-        cost: 55000,
-        discountPercentage: 0,
-        reviewNum: 1234,
-        quantity: 1
-    },
-    {
-        id: "asdffasdfasdgsafsfsdf",
-        category: "phone",
+        id: 4,
+        category: Category.iPhone,
         name: "iPhone 15",
         ram: 6,
         memory: 256,
-        img: "/iphone14pro.jpg",
-        cost: 55000,
-        discountPercentage: 20,
+        titleImg: "/iphone14pro.jpg",
+        price: 55000,
+        discount: 20,
         reviewNum: 345,
-        quantity: 1
+        rating: 4,
+        quantity: 45
     },
     {
-        id: "asdfsfsdasgdf",
-        category: "phone",
-        name: "iPhone 14",
-        ram: 6,
-        memory: 256,
-        img: "/iphone13pro.jpg",
-        cost: 55000,
-        discountPercentage: 0,
-        reviewNum: 1234,
-        quantity: 1
-    },
-    {
-        id: "asdffasdfasdfsfdasfsdf",
-        category: "phone",
+        id: 5,
+        category: Category.iPhone,
         name: "iPhone 15",
         ram: 6,
         memory: 256,
-        img: "/iphone14pro.jpg",
-        cost: 55000,
-        discountPercentage: 20,
+        titleImg: "/iphone14pro.jpg",
+        price: 55000,
+        discount: 20,
         reviewNum: 345,
-        quantity: 1
+        rating: 4,
+        quantity: 45
     },
 ]
 
@@ -140,10 +85,10 @@ export default function Cart() {
     }
 
     const [products, setProducts] = useState<ICartItem[]>(ar)
-    const removeProduct = (productId: string) => {
+    const removeProduct = (productId: number) => {
         setProducts(products.filter(product => product.id !== productId))
     }
-    const addProduct = (productId: string) => {
+    const addProduct = (productId: number) => {
         setProducts(prevProducts =>
             prevProducts.map(product =>
                 product.id === productId
@@ -167,11 +112,11 @@ export default function Cart() {
                 products.map((product: ICartItem) => (
                     <Card key={ product.id } className={ styles['product-wrap'] }>
                         <Link href={ "/cart" }>
-                            <Image src={ product.img } alt={ "product-img" } width={ 120 } height={ 120 }></Image>
+                            <Image src={ product.titleImg } alt={ "product-img" } width={ 120 } height={ 120 }></Image>
                         </Link>
                         <div className={ styles['product-action'] }>
                             <LinkText>{ product.name }</LinkText>
-                            <SwingButtons onAdd={ () => { addProduct } } count={ product.quantity } onRemove={ () => removeProduct(product.id) }></SwingButtons>
+                            {/* <SwingButtons onAdd={ () => { addProduct } } count={ product.quantity } onRemove={ () => removeProduct(product.id) }></SwingButtons> */ }
                             <StockStatus status="available-for-order"></StockStatus>
                         </div>
                     </Card>

@@ -33,7 +33,7 @@ export const TextArea = forwardRef(({ error, value, className, ...props }: TextA
                     rows={ 1 }
                 />
                 { error &&
-                    <img src="/errorInput.svg" className={ styles["error-icon"] } />
+                    <Image src="/errorInput.svg" className={ styles["error-icon"] } alt={ 'error' } width={ 24 } height={ 24 } />
                 }
             </div>
             <div className={ styles['text-error'] }>{ error }</div>
