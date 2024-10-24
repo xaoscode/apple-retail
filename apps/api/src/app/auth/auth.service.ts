@@ -6,6 +6,7 @@ import { RegisterDto } from './dto/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { TokenPayload } from './interfaces/tokenPayload.interface';
+import RequestWithUser from './interfaces/requestWithUser.interface';
 
 @Injectable()
 export class AuthService {
@@ -80,4 +81,8 @@ export class AuthService {
   }
 
   public setCurrentRefreshToken() {}
+
+  public async saveAvatar(file: Express.Multer.File, user: RequestWithUser) {
+    this.userService.saveAvatar(file, user);
+  }
 }

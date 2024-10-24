@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import NextAuth from "next-auth";
 import authConfig from "./auth.config";
 
@@ -9,7 +9,15 @@ import authConfig from "./auth.config";
 // 2. Wrapped middleware option
 const { auth } = NextAuth(authConfig);
 export default auth(async function middleware(req: NextRequest) {
-	// Your custom middleware logic goes here
+	const host = req.headers.get("host") || "";
+	if (host.startsWith("admin.")) {
+		const url = req.nextUrl.clone();
+		url.pathname = "/admin/login"; // Перенаправляем на страницу входа для администраторов
+		return NextResponse.redirect(url);
+	}
+
+	// Продолжаем выполнение для других запросов
+	return NextResponse.next();
 });
 
 export const config = {

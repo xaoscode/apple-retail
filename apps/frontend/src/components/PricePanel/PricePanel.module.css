@@ -7,23 +7,23 @@
 	width: 150px;
 }
 
-.cost-wrap {
+.price-wrap {
 	display: flex;
 	gap: 3px;
 	align-items: flex-end;
 }
 
-.cost-text {
+.price-text {
 	font: var(--font);
 	font-weight: 600;
 	font-size: 20px;
 }
 
-.cost-text.color {
+.price-text.color {
 	color: var(--primary-brand);
 }
 
-.cost-with-discount-text {
+.price-with-discount-text {
 	font: var(--font);
 	font-size: 12px;
 	text-decoration: line-through;

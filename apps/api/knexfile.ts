@@ -2,7 +2,7 @@ import type { Knex } from 'knex';
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
 
-config({ path: '../../envs/.db.env' });
+config({ path: '../../envs/db.env' });
 
 const configService = new ConfigService();
 const knexConfig: Knex.Config = {
@@ -18,5 +18,7 @@ const knexConfig: Knex.Config = {
 
 module.exports = knexConfig;
 
-// pnpm dlx knex migrate:make add_some_name
-// pnpm dlx knex migrate:latest
+// pnpm dlx knex migrate:make add_some_name - добавить новую миграцию
+// pnpm dlx knex migrate:latest - произвести миграцию
+// pnpm dlx knex migrate:rollback - откат последней миграции (--step=3 - откат на кол-во шагов - 3; --all - все)
+// pnpm dlx knex migrate:status

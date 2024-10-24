@@ -1,7 +1,9 @@
-import { IUser } from '@repo/interfaces';
+import { IUser, Roles } from '@repo/interfaces';
 
 export class UserDto implements IUser {
-  id?: string;
+  id: string;
+  role: Roles;
+  image?: string;
   email: string;
   password: string;
   phoneNumber?: string;
@@ -9,5 +11,5 @@ export class UserDto implements IUser {
   firstName?: string;
   lastName?: string;
   birthdate?: string;
-  dateOfRegistration?: string;
+  dateOfRegistration: string;
 }

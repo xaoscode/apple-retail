@@ -5,7 +5,7 @@ import * as Joi from 'joi';
 @Module({
   imports: [
     NestConfigModule.forRoot({
-      envFilePath: ['../../envs/.db.env', '../../envs/.jwt.env', '../../envs/.redis.env'],
+      envFilePath: ['../../envs/db.env', '../../envs/jwt.env', '../../envs/redis.env'],
       cache: true,
       isGlobal: true,
       validationSchema: Joi.object({

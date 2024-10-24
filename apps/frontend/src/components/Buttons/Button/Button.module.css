@@ -93,37 +93,37 @@
 	border: none;
 
 	&:hover {
-		background: var(--blue-5);
+		background: var(--black-5);
 	}
 	&:active {
-		background: linear-gradient(0deg, var(--blue-10), var(--blue-10));
+		background: linear-gradient(0deg, var(--black-10), var(--black-10));
 	}
 }
 
 .gray {
 	color: var(--primary-brand);
-	background-color: var(--blue-10);
+	background-color: var(--black-10);
 
 	&:hover {
-		background: linear-gradient(0deg, var(--blue-30), var(--blue-30));
+		background: linear-gradient(0deg, var(--black-30), var(--black-30));
 	}
 
 	&:active {
-		background: linear-gradient(0deg, var(--blue-10), var(--blue-10));
+		background: linear-gradient(0deg, var(--black-10), var(--black-10));
 	}
 }
 
 .outline {
-	border: 1px solid var(--blue-10);
+	border: 1px solid var(--black-10);
 
 	&:hover {
-		border: 1px solid var(--blue-20);
+		border: 1px solid var(--black-20);
 
-		background: var(--blue-5);
+		background: var(--black-5);
 	}
 
 	&:active {
-		background: linear-gradient(0deg, var(--blue-5), var(--blue-5));
+		background: linear-gradient(0deg, var(--black-5), var(--black-5));
 	}
 }
 
@@ -132,11 +132,11 @@
 	background-color: var(--primary-brand);
 
 	&:hover {
-		background: linear-gradient(0deg, var(--blue-70), var(--blue-70));
+		background: linear-gradient(0deg, var(--black-70), var(--black-70));
 	}
 
 	&:active {
-		background: linear-gradient(0deg, var(--blue-30), var(--blue-30));
+		background: linear-gradient(0deg, var(--black-30), var(--black-30));
 	}
 
 	.icon {

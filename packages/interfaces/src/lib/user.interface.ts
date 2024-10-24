@@ -1,5 +1,11 @@
+export enum Roles {
+	ADMIN = "admin",
+	USER = "user",
+	WORKER = "worker",
+}
 export interface IUser {
-	id?: string;
+	id: string;
+	role: Roles;
 	email: string;
 	password: string;
 	phoneNumber?: string;
@@ -7,5 +13,6 @@ export interface IUser {
 	firstName?: string;
 	lastName?: string;
 	birthdate?: string;
-	dateOfRegistration?: string;
+	image?: string;
+	dateOfRegistration: string;
 }

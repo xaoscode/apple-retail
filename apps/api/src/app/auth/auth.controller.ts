@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import RequestWithUser from './interfaces/requestWithUser.interface';
@@ -8,6 +8,9 @@ import { AuthCacheService } from './auth-caсhe.service';
 import JwtRefreshGuard from './jwt-refresh.guard';
 import { ApiBody } from '@nestjs/swagger';
 import LogInDto from './dto/logIn.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller('auth')
 export class AuthController {
@@ -30,7 +33,8 @@ export class AuthController {
       user: {
         id: user.id,
         email: user.email,
-        name: user.nickname,
+        image: user.image,
+        role: user.role,
       },
 
       backendTokens: {
@@ -54,12 +58,18 @@ export class AuthController {
 
     await this.authCacheService.saveRefreshToRedis(user.id, refreshToken);
     const currentTime = new Date();
-
+    console.log({
+      id: user.id,
+      email: user.email,
+      image: user.image,
+      role: user.role,
+    });
     return {
       user: {
         id: user.id,
         email: user.email,
-        name: user.nickname,
+        image: user.image,
+        role: user.role,
       },
 
       backendTokens: {
@@ -82,7 +92,7 @@ export class AuthController {
 
   @UseGuards(JwtRefreshGuard)
   @Get('refresh')
-  async refresh(@Req() request) {
+  async refresh(@Req() request: RequestWithUser) {
     console.log('refresh');
     const { user } = request;
 
@@ -105,7 +115,32 @@ export class AuthController {
   async logOut(@Req() request: RequestWithUser) {
     console.log('logout');
     await this.authCacheService.removeRefreshTokenFromRedis(request.user.id, request.cookies?.Refresh);
+    return true;
+  }
 
-    request.res.setHeader('Set-Cookie', this.authService.getCookieForLogOut());
+  @UseGuards(JwtAuthenticationGuard)
+  @Post('upload-avatar')
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: './uploads/avatars',
+        filename: (req, file, cb) => {
+          const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const ext = extname(file.originalname);
+          const filename = `${uniqueSuffix}${ext}`;
+          cb(null, filename);
+        },
+      }),
+    }),
+  )
+  async uploadAvatar(@UploadedFile() file: Express.Multer.File, @Req() user: RequestWithUser, @Body() a) {
+    console.log('upload');
+    console.log(file);
+    console.log(a);
+    await this.authService.saveAvatar(file, user);
+    return {
+      message: 'FIle UPload seccessfully',
+      filename: file.filename,
+    };
   }
 }

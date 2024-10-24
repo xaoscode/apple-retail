@@ -8,12 +8,12 @@ import { ConfigModule } from '../config/config.module';
   imports: [
     RedisModule.forRootAsync({
       imports: [ConfigModule],
+      inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'single',
         host: configService.get('REDIS_HOST'),
         port: configService.get('REDIS_PORT'),
       }),
-      inject: [ConfigService],
     }),
   ],
   providers: [RedisService],

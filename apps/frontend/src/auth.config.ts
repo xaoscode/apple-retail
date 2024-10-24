@@ -1,8 +1,7 @@
 import { type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { JWT, JWTOptions } from "next-auth/jwt";
-import { Backend_URL } from "./app/_lib/Constants";
-import { Adapter } from "next-auth/adapters";
+import { JWT } from "next-auth/jwt";
+import { Backend_URL } from "./app/(shop)/lib/Constants";
 
 async function refreshToken(token: JWT): Promise<JWT | null> {
 	const url = new URL("/api/auth/refresh", Backend_URL);
@@ -47,19 +46,23 @@ export default {
 					return null;
 				}
 				const user = await res.json();
+				console.log(user);
 				return user;
 			},
 		}),
 	],
 
 	callbacks: {
-		async jwt({ token, user }) {
+		async jwt({ token, user, trigger, session }) {
 			if (user) return { ...token, ...user };
 			if (new Date().getTime() < token.backendTokens.accessExp) return token;
 
 			return await refreshToken(token);
 		},
-		async session({ token, session }) {
+		async session({ token, session, trigger, newSession }) {
+			if (trigger === "update") {
+				console.log("update session");
+			}
 			session.user = token.user;
 			session.backendTokens = token.backendTokens;
 
