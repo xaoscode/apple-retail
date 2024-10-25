@@ -10,7 +10,7 @@ import authConfig from "./auth.config";
 const { auth } = NextAuth(authConfig);
 export default auth(async function middleware(req: NextRequest) {
 	const host = req.headers.get("host") || "";
-	if (host.startsWith("admin.")) {
+	if (host.startsWith("sub.")) {
 		const url = req.nextUrl.clone();
 		url.pathname = "/admin/login"; // Перенаправляем на страницу входа для администраторов
 		return NextResponse.redirect(url);
