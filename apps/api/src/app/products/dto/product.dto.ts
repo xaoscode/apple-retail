@@ -1,19 +1,35 @@
 import { Category, IProduct } from '@repo/interfaces';
 
 export class ProductDto implements IProduct {
-  id?: string;
+  date?: Date;
+  rating: number;
+  id?: number;
   manufacturer: string;
   category: Category;
   name: string;
   model?: string;
-  ram?: number;
-  memory?: number;
-  screenSize?: number;
-  batteryLife?: number;
-  releaseYear?: number;
+  article?: string;
+  price: number;
+  warranty?: number;
+  releaseYear: number;
+  count?: number = 0;
+  discount: number = 0.0;
   titleImg: string;
   images: string[];
-  price: number;
-  discountPercentage?: number;
-  reviewNum: number;
+  reviewNum?: number = 0;
+  color?: string;
+  camera?: string;
+  simCount?: number;
+  memory?: number;
+  ram?: number;
+  batteryLife?: number;
+  matrix?: string;
+  screenWidthPx?: number;
+  screenHeightPx?: number;
+  diagonalInch?: number;
+  displayHertz?: number;
+  processor?: string;
+  cores?: number;
+  weight?: number;
+  length?: number;
 }

@@ -7,6 +7,7 @@ import { Header } from "./components/ Header/Header";
 import { SmallHeader } from "./components/SmallHeader/SmallHeader";
 // import { SupportChat } from "./components/SupportChat/SupportChat";
 import AuthWrapper from "./AuthWrapper";
+import { Sidebar } from "./components/Sidebar/Sidebar";
 
 const DMSans = Inter({
   subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({
           <AuthWrapper>
             <Header className={ styles.header } />
           </AuthWrapper>
+          {/* <Sidebar className={ styles.sidebar }></Sidebar> */ }
           <div className={ styles.body }>
             { children }
           </div>

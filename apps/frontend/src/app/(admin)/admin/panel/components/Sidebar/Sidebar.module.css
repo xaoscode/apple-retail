@@ -1,0 +1,25 @@
+.sidebar {
+	box-shadow: var(--global-box-shadow);
+	min-height: 100vh;
+	background: var(--black-5);
+}
+
+.block {
+	width: var(--sidebar-width);
+	transition: width 0.3s linear;
+}
+
+.sidebar[data-state="collapsed"] .block {
+	width: 0;
+}
+
+.hidenblock {
+	transition: 0.3s linear;
+	width: var(--sidebar-width);
+	left: 0;
+	position: fixed;
+}
+
+.sidebar[data-state="collapsed"] .hidenblock {
+	left: calc(var(--sidebar-width) * -1);
+}

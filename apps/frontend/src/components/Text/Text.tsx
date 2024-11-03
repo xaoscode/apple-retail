@@ -14,7 +14,9 @@ export function Text({ size, children, className, ...props }: TextProps): JSX.El
                     [styles["h4"]]: size === "3",
 
                 }
-            ) }>{ children }</div>
+            ) }>
+            { children }
+        </div>
 
 
     )

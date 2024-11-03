@@ -15,17 +15,17 @@ export async function up(knex: Knex): Promise<void> {
   await knex.raw(`
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
-      manufacturer: VARCHAR(100) NOT NULL,
+      manufacturer VARCHAR(100) NOT NULL,
       category product_category NOT NULL,
       name VARCHAR(100) NOT NULL,
-      model: VARCHAR(100) NOT NULL,
+      model VARCHAR(100) NOT NULL,
       article VARCHAR(100) NOT NULL UNIQUE,
       price DECIMAL(10, 2) NOT NULL,
       warranty INT,
       release_year INT NOT NULL,
       count INT DEFAULT 0,
       discount DECIMAL(5, 2) DEFAULT 0.00,
-      title_img TEXT
+      title_img TEXT,
       images TEXT[],
       reviewNum INT DEFAULT 0,
       date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -43,7 +43,7 @@ export async function up(knex: Knex): Promise<void> {
       processor VARCHAR(100),
       cores INT,
       weight INT,
-      length INT,
+      length INT
     );
   `);
 }

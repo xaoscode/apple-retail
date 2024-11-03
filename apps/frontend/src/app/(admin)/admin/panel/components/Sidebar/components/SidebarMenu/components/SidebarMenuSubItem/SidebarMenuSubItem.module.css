@@ -1,0 +1,8 @@
+.button {
+	width: 100%;
+}
+.button-text {
+	display: flex;
+	justify-content: start;
+	width: 100%;
+}

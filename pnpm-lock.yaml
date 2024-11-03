@@ -210,6 +210,18 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
+      embla-carousel:
+        specifier: ^8.3.1
+        version: 8.3.1
+      embla-carousel-auto-scroll:
+        specifier: ^8.3.1
+        version: 8.3.1(embla-carousel@8.3.1)
+      embla-carousel-autoplay:
+        specifier: ^8.3.1
+        version: 8.3.1(embla-carousel@8.3.1)
+      embla-carousel-react:
+        specifier: ^8.3.1
+        version: 8.3.1(react@19.0.0-rc-3dfd5d9e-20240910)
       jwt-decode:
         specifier: ^4.0.0
         version: 4.0.0
@@ -3131,6 +3143,29 @@ packages:
 
   electron-to-chromium@1.5.7:
     resolution: {integrity: sha512-6FTNWIWMxMy/ZY6799nBlPtF1DFDQ6VQJ7yyDP27SJNt5lwtQ5ufqVvHylb3fdQefvRcgA3fKcFMJi9OLwBRNw==}
+
+  embla-carousel-auto-scroll@8.3.1:
+    resolution: {integrity: sha512-jrLEZLceCdQqTGCf9S4W1/AX4S8BwDmiW3eDKdpFEbhrQ187t7MVRDr9M17ljI7V4DMorExgZzEHnokjGS+0SQ==}
+    peerDependencies:
+      embla-carousel: 8.3.1
+
+  embla-carousel-autoplay@8.3.1:
+    resolution: {integrity: sha512-L8THF1AJJSQtlNa1wZ6lEKh/CiZssE3TsVFtabQNsS+pc1O1O/YTIYCC3khdQAztGMOBf3WfVDIY/4AIfQj3JQ==}
+    peerDependencies:
+      embla-carousel: 8.3.1
+
+  embla-carousel-react@8.3.1:
+    resolution: {integrity: sha512-gBY0zM+2ASvKFwRpTIOn2SLifFqOKKap9R/y0iCpJWS3bc8OHVEn2gAThGYl2uq0N+hu9aBiswffL++OYZOmDQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+
+  embla-carousel-reactive-utils@8.3.1:
+    resolution: {integrity: sha512-Js6rTTINNGnUGPu7l5kTcheoSbEnP5Ak2iX0G9uOoI8okTNLMzuWlEIpYFd1WP0Sq82FFcLkKM2oiO6jcElZ/Q==}
+    peerDependencies:
+      embla-carousel: 8.3.1
+
+  embla-carousel@8.3.1:
+    resolution: {integrity: sha512-DutFjtEO586XptDn4cwvBJwsR/8fMa4jUk5Jk2g+/elKgu8mdn0Z2sx33g4JskvbLc1/6P8Xg4QlfELGJFcP5A==}
 
   emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
@@ -9604,6 +9639,26 @@ snapshots:
   electron-to-chromium@1.4.824: {}
 
   electron-to-chromium@1.5.7: {}
+
+  embla-carousel-auto-scroll@8.3.1(embla-carousel@8.3.1):
+    dependencies:
+      embla-carousel: 8.3.1
+
+  embla-carousel-autoplay@8.3.1(embla-carousel@8.3.1):
+    dependencies:
+      embla-carousel: 8.3.1
+
+  embla-carousel-react@8.3.1(react@19.0.0-rc-3dfd5d9e-20240910):
+    dependencies:
+      embla-carousel: 8.3.1
+      embla-carousel-reactive-utils: 8.3.1(embla-carousel@8.3.1)
+      react: 19.0.0-rc-3dfd5d9e-20240910
+
+  embla-carousel-reactive-utils@8.3.1(embla-carousel@8.3.1):
+    dependencies:
+      embla-carousel: 8.3.1
+
+  embla-carousel@8.3.1: {}
 
   emittery@0.13.1: {}
 

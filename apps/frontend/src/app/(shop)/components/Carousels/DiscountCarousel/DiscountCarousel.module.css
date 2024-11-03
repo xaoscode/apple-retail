@@ -1,0 +1,44 @@
+.product-with-discount {
+	display: flex;
+	padding: 0 10px;
+	flex-direction: column;
+	gap: 5px;
+	box-shadow: 0 1px 5px 1px rgb(177 175 175 / 40%);
+	margin: 5px 5px 5px;
+	border-radius: 12px;
+	padding: 10px;
+	background: var(--white-100);
+}
+
+.description-text {
+	font-size: 16px;
+	line-height: 20px;
+	padding-top: 5px;
+}
+.price-wrap {
+	display: flex;
+	gap: 10px;
+	align-items: flex-end;
+}
+.price-text {
+	font-size: 22px;
+	line-height: 24px;
+	color: var(--primary-brand);
+}
+.price-with-discount-text {
+	font-size: 12px;
+	line-height: 14px;
+	text-decoration: line-through;
+	color: var(--black-30);
+}
+.action-wrap {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	overflow: hidden;
+}
+.action {
+	display: flex;
+	gap: 10px;
+}

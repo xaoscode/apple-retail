@@ -1,0 +1,61 @@
+.background {
+	box-shadow: 0 1px 5px 1px rgb(177 175 175 / 40%);
+	margin: 5px 5px 5px;
+	border-radius: 12px;
+	background: var(--white-100);
+}
+.product-history {
+	display: flex;
+	flex-direction: column;
+	padding: 0 10px;
+	gap: 10px;
+	padding: 10px;
+}
+
+.action-wrap-history {
+	display: flex;
+	align-content: space-between;
+	justify-content: center;
+	position: relative;
+}
+.offer {
+	height: 32px;
+	width: 32px;
+}
+.trash-button {
+	position: absolute;
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	border: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--black-10);
+	cursor: pointer;
+	right: 0;
+	&:hover svg {
+		fill: var(--primary-brand);
+	}
+}
+
+.text {
+	font-size: 18px;
+}
+
+.actions {
+	display: flex;
+	gap: 10px;
+	width: 100%;
+	align-content: space-between;
+}
+
+.link {
+	text-decoration: none;
+}
+
+.product.back {
+	box-shadow: 0 1px 5px 1px rgb(177 175 175 / 40%);
+	border-radius: 10px;
+	gap: 10px;
+}

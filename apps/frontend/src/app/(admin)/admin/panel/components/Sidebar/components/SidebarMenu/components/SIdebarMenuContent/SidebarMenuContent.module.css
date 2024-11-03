@@ -1,0 +1,6 @@
+.menu-content {
+	display: block;
+}
+.menu-content[data-status="collapsed"] {
+	display: none;
+}

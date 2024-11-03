@@ -1,0 +1,26 @@
+.content {
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	gap: 2px;
+}
+
+.group {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.label {
+	display: flex;
+	flex-shrink: 1;
+	align-items: center;
+	font-weight: 500;
+	outline: none;
+	padding: 8px;
+}
+
+.group-content {
+	display: flex;
+	font-size: 12px;
+}

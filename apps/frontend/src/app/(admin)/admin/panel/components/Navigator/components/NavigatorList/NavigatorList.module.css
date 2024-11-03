@@ -1,0 +1,15 @@
+.ol {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 1.5rem;
+	word-break: break-word;
+	color: var(--muted-foreground);
+	list-style: none;
+}
+
+@media (min-width: 1000px) {
+	.ol {
+		gap: 2.5rem;
+	}
+}

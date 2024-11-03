@@ -1,0 +1,11 @@
+.menu-sub {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	border-left: 1px solid var(--black-10);
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	transform: translateX(1px);
+}

@@ -5,7 +5,7 @@ import styles from './AuthForm.module.css';
 import { Input } from '@/components/Input/Input';
 import Image from 'next/image';
 import { ApiErrors } from '../ApiError/ApiError';
-import { SumbitButton } from '../SubmitButton/SumbitButton';
+import { SumbitButton } from '../../../../../../../../components/Buttons/SubmitButton/SumbitButton';
 import { INITIAL_STATE } from '../../_auth_actions/initital-state';
 
 interface AuthFormProps extends DetailedHTMLProps<HtmlHTMLAttributes<HTMLFormElement>, HTMLFormElement> {

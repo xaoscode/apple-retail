@@ -1,0 +1,15 @@
+.wrap {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+.button {
+	width: 100%;
+}
+.icon {
+}
+.icon[data-status="expanded"] {
+	transform: rotate(90deg);
+}

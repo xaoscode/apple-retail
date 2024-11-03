@@ -1,0 +1,19 @@
+.wrap {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+/* .wrap {
+	display: grid;
+	height: 100vh;
+	grid-template:
+		"sidebar navigator" auto
+		"sidebar body" auto
+		/ var(--sidebar-width) auto;
+	transition: 300ms;
+}
+
+.wrap[data-state="expanded"] {
+	grid-template-columns: 0 auto;
+} */

@@ -1,11 +1,14 @@
 .wrapper {
 	display: grid;
 	grid-template:
-		". small-header small-header ." auto ". header header ." auto ". body body ." 1fr "footer footer footer footer" auto / auto 230px minmax(320px, 1200px)
+		". small-header ." auto
+		". header ." auto
+		". body ." 1fr
+		"footer footer footer " auto / auto minmax(320px, 1530px)
 		auto;
 	min-height: 100vh;
+	background-color: var(--black-5);
 	gap: 10px;
-	background-color: var(--black-1);
 }
 .small-header {
 	grid-area: small-header;

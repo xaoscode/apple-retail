@@ -9,6 +9,7 @@ export function Button({ size, design, children, icon, className, ...props }: Bu
         <button
             { ...props }
             className={ cn(
+                className,
                 styles["button"],
                 {
                     [styles["small"]]: size === 'small',
@@ -21,7 +22,6 @@ export function Button({ size, design, children, icon, className, ...props }: Bu
                     [styles["outline"]]: design === 'outline',
                     [styles["filled"]]: design === 'filled',
                 },
-                className,
                 {
                     [styles["no-child-small"]]: size === 'small' && !children,
                     [styles["no-child-medium"]]: size === 'medium' && !children,
@@ -30,9 +30,9 @@ export function Button({ size, design, children, icon, className, ...props }: Bu
             ) }
 
         >
-            <div className={ styles["positions"] }>
+            <div className={ cn(styles["positions"]) }>
                 { icon &&
-                    <Image src={ icon } alt="icon" className={ styles.icon } width={ 32 } height={ 32 } /> }
+                    <Image src={ icon } alt={ icon } className={ styles.icon } width={ 32 } height={ 32 } /> }
                 { children }
             </div>
         </button>

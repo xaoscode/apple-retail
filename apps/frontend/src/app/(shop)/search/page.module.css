@@ -1,0 +1,13 @@
+.body {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.product {
+	display: flex;
+	flex-direction: row;
+	background: var(--white-100);
+	box-shadow: var(--global-box-shadow);
+	border-radius: var(--global-border-radius);
+}

@@ -1,0 +1,15 @@
+.wrapper {
+	display: grid;
+	grid-template:
+		"sidebar body" auto
+		/ 20% 80%;
+	min-height: 100vh;
+}
+
+.sidebar {
+	grid-area: sidebar;
+}
+.body {
+	grid-area: body;
+	margin-left: 10px;
+}

@@ -9,6 +9,7 @@ import { ChatGateway } from './chat/chat.gateway';
 import { ChatModule } from './chat/chat.module';
 import { UpRedisModule } from './core/redis/redis.module';
 import { UserModule } from './user/user.module';
+import { ProductModule } from './products/product.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { UserModule } from './user/user.module';
     UserModule,
     AuthModule,
     UpRedisModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],

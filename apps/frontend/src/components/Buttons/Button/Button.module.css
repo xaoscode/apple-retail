@@ -132,11 +132,11 @@
 	background-color: var(--primary-brand);
 
 	&:hover {
-		background: linear-gradient(0deg, var(--black-70), var(--black-70));
+		background: linear-gradient(0deg, var(--blue-70), var(--blue-70));
 	}
 
 	&:active {
-		background: linear-gradient(0deg, var(--black-30), var(--black-30));
+		background: linear-gradient(0deg, var(--blue-30), var(--blue-30));
 	}
 
 	.icon {

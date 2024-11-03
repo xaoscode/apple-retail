@@ -1,0 +1,7 @@
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	box-shadow: var(--global-box-shadow);
+	border-radius: var(--global-border-radius);
+	background: var(--white-100);
+}

@@ -7,7 +7,7 @@ import UserIcon from '../../../../../../../public/user.svg'
 import { Button } from "@/components/Buttons/Button/Button";
 import { AppContext } from "@/app/(shop)/context/app.context";
 import cn from 'classnames'
-import { SumbitButton } from "../AuthCard/components/SubmitButton/SumbitButton";
+import { SumbitButton } from "../../../../../../components/Buttons/SubmitButton/SumbitButton";
 import { logoutAction } from "@/app/(shop)/components/ Header/components/AuthCard/_auth_actions/auth-actions";
 import { useSession } from "next-auth/react";
 import { INITIAL_STATE } from "../AuthCard/_auth_actions/initital-state";

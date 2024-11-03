@@ -9,7 +9,7 @@ import { join } from 'path';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use('/avatars', express.static(join(process.cwd(), 'uploads/avatars')));
-
+  app.use('/products', express.static(join(process.cwd(), 'uploads/products')));
   app.enableCors({
     origin: 'http://localhost:3001',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
