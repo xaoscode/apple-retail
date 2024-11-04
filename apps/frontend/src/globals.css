@@ -26,12 +26,12 @@
 	--black-90: rgb(0 0 0/ 90%);
 	--secondary-red: rgb(255 71 71 / 100%);
 	--white-100: rgb(255 255 255 / 100%);
-	--white-40: rgb(255 255 255 / 100%);
+	--white-40: rgb(255 255 255 / 40%);
 	--main-back: rgba(247, 249, 251, 1);
 
 	--sidebar-width: 300px;
 	--sidebar-width-icon: 50px;
-	--global-box-shadow: 0 1px 3px rgb(177 175 175 / 20%);
+	--global-box-shadow: 0 1px 3px 1px rgb(177 175 175 / 30%);
 	--global-border-radius: 12px;
 }
 

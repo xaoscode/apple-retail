@@ -1,6 +1,11 @@
 import type { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
+  await knex.raw(
+    `
+    CREATE EXTENSION IF NOT EXISTS pg_trgm;
+    `,
+  );
   await knex.raw(`
     CREATE TYPE product_category AS ENUM (
       'headphones',

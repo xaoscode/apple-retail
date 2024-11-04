@@ -32,7 +32,7 @@ export async function DiscountCarousel() {
                     <Button className={ styles.button } size="medium" design="outline">Подробнее</Button>
                     <HeartButton activated={ false }></HeartButton>
                 </div>
-                <Image width={ 120 } height={ 120 } src={ `${API.productImage.get}${product.titleImg}.jpg` } alt={ product.name } />
+                <Image width={ 120 } height={ 120 } src={ `${API.productImage.get}${product.titleImg}.jpg` } alt={ `image ${product.titleImg}` } />
             </div>
         </div>
     ))

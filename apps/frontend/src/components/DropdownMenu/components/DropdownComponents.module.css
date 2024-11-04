@@ -1,0 +1,46 @@
+.sub__trigger {
+	display: flex;
+	cursor: pointer;
+	gap: 10px;
+	padding-inline: 10px;
+}
+
+.content {
+	background: var(--white-100);
+	z-index: 50;
+	width: 300px;
+	border-radius: var(--global-border-radius);
+	box-shadow: var(--global-box-shadow);
+	padding: 10px 0px 10px;
+}
+
+.checkbox__item {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 8px 50px;
+	margin: 5px 0;
+	font-size: 16px;
+	line-height: 1.2;
+	outline: none;
+
+	&:hover {
+		background: var(--blue-10);
+	}
+	&:focus {
+		background: var(--blue-10);
+		border: none;
+	}
+}
+
+.checkbox__icon {
+	position: absolute;
+	left: 8px;
+	display: flex;
+	align-items: center;
+}
+
+.span__blyat {
+	line-height: 0px;
+}

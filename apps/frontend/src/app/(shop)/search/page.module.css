@@ -11,3 +11,11 @@
 	box-shadow: var(--global-box-shadow);
 	border-radius: var(--global-border-radius);
 }
+
+.result__filter {
+	display: inline;
+	background: var(--white-100);
+	box-shadow: var(--global-box-shadow);
+	border-radius: var(--global-border-radius);
+	padding: 10px;
+}

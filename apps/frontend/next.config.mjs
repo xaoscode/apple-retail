@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		domains: ["localhost"], // Добавляем localhost для использования изображений с этого домена
+		remotePatterns: [
+			{
+				protocol: "http",
+				hostname: "localhost",
+				port: "3000",
+				pathname: "/**",
+			},
+		],
 	},
 	webpack(config) {
 		// Grab the existing rule that handles SVG imports

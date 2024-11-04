@@ -3,9 +3,9 @@
 	padding: 0 10px;
 	flex-direction: column;
 	gap: 5px;
-	box-shadow: 0 1px 5px 1px rgb(177 175 175 / 40%);
+	box-shadow: var(--global-box-shadow);
 	margin: 5px 5px 5px;
-	border-radius: 12px;
+	border-radius: var(--global-border-radius);
 	padding: 10px;
 	background: var(--white-100);
 }
